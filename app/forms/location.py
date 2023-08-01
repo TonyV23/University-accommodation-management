@@ -2,7 +2,7 @@ from django.forms import ModelForm
 
 from app.models import Location
 
-class RefugeeForm (ModelForm) :
+class LocationForm (ModelForm) :
 
     class Meta :
         model = Location

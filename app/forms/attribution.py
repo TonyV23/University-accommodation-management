@@ -2,7 +2,7 @@ from django.forms import ModelForm
 
 from app.models import Attribution
 
-class RefugeeForm (ModelForm) :
+class AttributionForm (ModelForm) :
 
     class Meta :
         model = Attribution

@@ -2,7 +2,7 @@ from django.forms import ModelForm
 
 from app.models import Student
 
-class RefugeeForm (ModelForm) :
+class StudentForm (ModelForm) :
 
     class Meta :
         model = Student
