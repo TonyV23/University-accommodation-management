@@ -6,9 +6,18 @@ class BedRoom(models.Model) :
             ('M','Male'),('F', 'female')
         )
     
-    number = models.CharField(max_length=20,unique=True)
+    number = models.CharField(max_length=20, unique=True)
     category = models.CharField(choices=bedRoomType, max_length=10)
+    occupied = models.BooleanField(default=False)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.designation
+        return self.number
+    
+    class Meta :
+         constraints = [
+            models.UniqueConstraint(
+                fields = ['number', 'category', 'occupied', 'location'],
+                name = 'unique_bedroom'
+            )
+        ]
