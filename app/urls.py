@@ -1,6 +1,56 @@
 from django.urls import path
-from app.views import home
+from app.views import home, student, attribution, application, bedroom, location, department, faculty
 
 urlpatterns = [
     path('', home.index, name ='dashboard'),
+
+    path('student', student.index, name ='view_student'),
+    path('student/add', student.add_student, name ='add_student'),
+    path('student/store', student.store_student, name ='store_student'),
+    path('student/edit/<int:id>', student.edit_student, name ='edit_student'),
+    path('student/update/<int:id>', student.update_student, name ='update_student'),
+    path('student/delete/<int:id>', student.delete_student, name ='delete_student'),
+
+    path('attribution', attribution.index, name ='view_attribution'),
+    path('attribution/add', attribution.add_attribution, name ='add_attribution'),
+    path('attribution/store', attribution.store_attribution, name ='store_attribution'),
+    path('attribution/edit/<int:id>', attribution.edit_attribution, name ='edit_attribution'),
+    path('attribution/update/<int:id>', attribution.update_attribution, name ='update_attribution'),
+    path('attribution/delete/<int:id>', attribution.delete_attribution, name ='delete_attribution'),
+
+    path('application', application.index, name ='view_application'),
+    path('application/add', application.add_application, name ='add_application'),
+    path('application/store', application.store_application, name ='store_application'),
+    path('application/edit/<int:id>', application.edit_application, name ='edit_application'),
+    path('application/update/<int:id>', application.update_application, name ='update_application'),
+    path('application/delete/<int:id>', application.delete_application, name ='delete_application'),
+
+    path('bedroom', bedroom.index, name ='view_bedroom'),
+    path('bedroom/add', bedroom.add_bedroom, name ='add_bedroom'),
+    path('bedroom/store', bedroom.store_bedroom, name ='store_bedroom'),
+    path('bedroom/edit/<int:id>', bedroom.edit_bedroom, name ='edit_bedroom'),
+    path('bedroom/update/<int:id>', bedroom.update_bedroom, name ='update_bedroom'),
+    path('bedroom/delete/<int:id>', bedroom.delete_bedroom, name ='delete_bedroom'),
+
+    path('location', location.index, name ='view_location'),
+    path('location/add', location.add_location, name ='add_location'),
+    path('location/store', location.store_location, name ='store_location'),
+    path('location/edit/<int:id>', location.edit_location, name ='edit_location'),
+    path('location/update/<int:id>', location.update_location, name ='update_location'),
+    path('location/delete/<int:id>', location.delete_location, name ='delete_location'),
+
+    path('department', department.index, name ='view_location'),
+    path('department/add', department.add_department, name ='add_department'),
+    path('department/store', department.store_department, name ='store_department'),
+    path('department/edit/<int:id>', department.edit_department, name ='edit_department'),
+    path('department/update/<int:id>', department.update_department, name ='update_department'),
+    path('department/delete/<int:id>', department.delete_department, name ='delete_department'),
+
+    path('faculty', faculty.index, name ='view_location'),
+    path('faculty/add', faculty.add_faculty, name ='add_faculty'),
+    path('faculty/store', faculty.store_faculty, name ='store_faculty'),
+    path('faculty/edit/<int:id>', faculty.edit_faculty, name ='edit_faculty'),
+    path('faculty/update/<int:id>', faculty.update_faculty, name ='update_faculty'),
+    path('faculty/delete/<int:id>', faculty.delete_faculty, name ='delete_faculty'),
+    
 ]
