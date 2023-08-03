@@ -1,9 +1,45 @@
-{% extends 'app/layouts/default.html' %} 
+{% extends 'app/layouts/default.html' %}
 
 {% block content %}
 
 {% load crispy_forms_tags %}
 
+<div class="row">
+    <div class="col-lg-12">
 
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">LES DES DEMANDES</h5>
+                <a href="{% url 'add_application' %}" class="hack2-btn">FAIRE UNE DEMANDE</a>
+                <table class="table datatable">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">ETUDIANT (E)</th>
+                            <th scope="col">LETTRE DEMANDE</th>
+                            <th scope="col">DATE DEMANDE</th>
+                            <th scope="col">ACTIONS</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for application in application_list %}
+                        <tr>
+                            <th scope="row">{{ forloop.counter }}</th>
+                            <td>{{ application.student }}</td>
+                            <td>{{ application.bedroom }}</td>
+                            <td>{{ application.date_attribution }}</td>
+                            <td>
+                                <a href="{% url 'edit_application' application.id %}" class="hack-btn">MODIFIER</a>
+                                <a href="{% url 'delete_application' application.id %}" class="hack1-btn">SUPPRIMER</a>
+                            </td>
+                        </tr>
+                    </tbody>
+                    {% endfor %}
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 {% endblock %}
