@@ -39,14 +39,14 @@ urlpatterns = [
     path('location/update/<int:id>', location.update_location, name ='update_location'),
     path('location/delete/<int:id>', location.delete_location, name ='delete_location'),
 
-    path('department', department.index, name ='view_location'),
+    path('department', department.index, name ='view_department'),
     path('department/add', department.add_department, name ='add_department'),
     path('department/store', department.store_department, name ='store_department'),
     path('department/edit/<int:id>', department.edit_department, name ='edit_department'),
     path('department/update/<int:id>', department.update_department, name ='update_department'),
     path('department/delete/<int:id>', department.delete_department, name ='delete_department'),
 
-    path('faculty', faculty.index, name ='view_location'),
+    path('faculty', faculty.index, name ='view_faculty'),
     path('faculty/add', faculty.add_faculty, name ='add_faculty'),
     path('faculty/store', faculty.store_faculty, name ='store_faculty'),
     path('faculty/edit/<int:id>', faculty.edit_faculty, name ='edit_faculty'),
