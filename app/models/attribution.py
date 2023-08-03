@@ -1,19 +1,25 @@
 from django.db import models
-from app.models import Student
+from django.db.models.signals import post_save
+
+from app.models import Student, BedRoom
+
+def update_bedroom_status(sender, instance, created, **kwargs):
+    bedroom = instance.bedroom
+    bedroom.status = True
+    bedroom.save()
 
 class Attribution(models.Model) :
-       
+    
     student = models.ForeignKey(Student, on_delete=models.CASCADE)
-    application_letter = models.TextField(max_length=500)
-    date_application = models.DateField()
-    
-    def __str__(self) -> str:
-        return self.designation
-    
+    bedroom = models.ForeignKey(BedRoom, on_delete=models.CASCADE)
+    date_attribution = models.DateField(auto_now_add=True)
+
     class Meta :
          constraints = [
             models.UniqueConstraint(
-                fields = ['student', 'application_letter', 'date_application'],
+                fields = ['student', 'bedroom', 'date_attribution'],
                 name = 'unique_attribution'
             )
         ]
+    
+post_save.connect(update_bedroom_status, sender= Attribution)  

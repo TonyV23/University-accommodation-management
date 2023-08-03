@@ -8,7 +8,7 @@ class BedRoom(models.Model) :
     
     number = models.CharField(max_length=20, unique=True)
     category = models.CharField(choices=bedRoomType, max_length=10)
-    occupied = models.BooleanField(default=False)
+    status =  models.BooleanField(default=False)
     location = models.ForeignKey(Location, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -17,7 +17,7 @@ class BedRoom(models.Model) :
     class Meta :
          constraints = [
             models.UniqueConstraint(
-                fields = ['number', 'category', 'occupied', 'location'],
+                fields = ['number', 'category', 'status', 'location'],
                 name = 'unique_bedroom'
             )
         ]
