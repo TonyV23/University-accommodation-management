@@ -50,7 +50,7 @@ def store_attribution(request):
             messages.success(request,"L'attribution a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/settings/attribution/index')
+        return redirect('/attribution')
 
 def edit_attribution(request, id):
     assert isinstance(request, HttpRequest)
@@ -84,12 +84,12 @@ def update_attribution(request, id):
         if form.is_valid():
             form.save()
         messages.success(request, "L'attribution a été modifié avec succès !")
-        return redirect('/settings/attribution/index')
+        return redirect('/attribution')
     
 def delete_attribution(request, id) :
     attribution = Attribution.objects.get(pk = id)
     attribution.delete()
     messages.success(request,"L'attribution a été supprimé avec succès !")
-    return redirect('/settings/attribution/index')
+    return redirect('/attribution')
 
 

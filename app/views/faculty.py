@@ -47,7 +47,7 @@ def store_faculty(request):
             messages.success(request,"La faculté a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/settings/faculty/index')
+        return redirect('/faculty')
 
 def edit_faculty(request, id):
     assert isinstance(request, HttpRequest)
@@ -81,10 +81,10 @@ def update_faculty (request, id):
         if form.is_valid():
             form.save()
         messages.success(request, "La faculté a été modifié avec succès !")
-        return redirect('/settings/faculty/index')
+        return redirect('/faculty')
     
 def delete_faculty (request, id) :
     faculty = Faculty.objects.get(pk = id)
     faculty.delete()
     messages.success(request,"La faculté a été supprimé avec succès !")
-    return redirect('/settings/faculty/index')
+    return redirect('/faculty')

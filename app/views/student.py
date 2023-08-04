@@ -50,7 +50,7 @@ def store_student(request):
             messages.success(request,"L' etudiant a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/settings/student/index')
+        return redirect('/student')
 
 def edit_student(request, id):
     assert isinstance(request, HttpRequest)
@@ -84,12 +84,12 @@ def update_student(request, id):
         if form.is_valid():
             form.save()
         messages.success(request, "L' etudiant a été modifié avec succès !")
-        return redirect('/settings/student/index')
+        return redirect('/student')
     
 def delete_student(request, id) :
     student = Student.objects.get(pk = id)
     student.delete()
     messages.success(request,"L'etudiant a été supprimé avec succès !")
-    return redirect('/settings/student/index')
+    return redirect('/student')
 
 

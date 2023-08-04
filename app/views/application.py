@@ -47,7 +47,7 @@ def store_application(request):
             messages.success(request,"La demande a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/settings/application/index')
+        return redirect('/application')
 
 def edit_application(request, id):
     assert isinstance(request, HttpRequest)
@@ -81,10 +81,10 @@ def update_application(request, id):
         if form.is_valid():
             form.save()
         messages.success(request, "La demande a été modifié avec succès !")
-        return redirect('/settings/application/index')
+        return redirect('/application')
     
 def delete_application(request, id) :
     application = Application.objects.get(pk = id)
     application.delete()
     messages.success(request,"La demande a été supprimé avec succès !")
-    return redirect('/settings/application/index')
+    return redirect('/application')

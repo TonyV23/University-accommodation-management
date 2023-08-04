@@ -47,7 +47,7 @@ def store_location(request):
             messages.success(request,"La localisation a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/settings/location/index')
+        return redirect('/location')
 
 def edit_location(request, id):
     assert isinstance(request, HttpRequest)
@@ -81,10 +81,10 @@ def update_location(request, id):
         if form.is_valid():
             form.save()
         messages.success(request, "La localisation a été modifié avec succès !")
-        return redirect('/settings/location/index')
+        return redirect('/location')
     
 def delete_location(request, id) :
     location = Location.objects.get(pk = id)
     location.delete()
     messages.success(request,"La localisation a été supprimé avec succès !")
-    return redirect('/settings/location/index')
+    return redirect('/location')

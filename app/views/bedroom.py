@@ -49,7 +49,7 @@ def store_bedroom(request):
             messages.success(request,"La chambre a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/settings/bedroom/index')
+        return redirect('/bedroom')
 
 def edit_bedroom(request, id):
     assert isinstance(request, HttpRequest)
@@ -83,12 +83,12 @@ def update_bedroom(request, id):
         if form.is_valid():
             form.save()
         messages.success(request, "La chambre a été modifié avec succès !")
-        return redirect('/settings/bedroom/index')
+        return redirect('/bedroom')
     
 def delete_bedroom(request, id) :
     bedroom = BedRoom.objects.get(pk = id)
     bedroom.delete()
     messages.success(request,"La chambre a été supprimé avec succès !")
-    return redirect('/settings/bedroom/index')
+    return redirect('/bedroom')
 
 

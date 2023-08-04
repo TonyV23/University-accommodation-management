@@ -49,7 +49,7 @@ def store_department(request):
             messages.success(request,"Le department a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/settings/department/index')
+        return redirect('/department')
 
 def edit_department(request, id):
     assert isinstance(request, HttpRequest)
@@ -83,12 +83,12 @@ def update_department(request, id):
         if form.is_valid():
             form.save()
         messages.success(request, "Le department a été modifié avec succès !")
-        return redirect('/settings/department/index')
+        return redirect('/department')
     
 def delete_department(request, id) :
     department = Department.objects.get(pk = id)
     department.delete()
     messages.success(request,"Le department a été supprimé avec succès !")
-    return redirect('/settings/department/index')
+    return redirect('/department')
 
 

@@ -47,7 +47,7 @@ def store_campus(request):
             messages.success(request,"Le campus a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/settings/campus/index')
+        return redirect('/campus')
 
 def edit_campus(request, id):
     assert isinstance(request, HttpRequest)
@@ -81,10 +81,10 @@ def update_campus(request, id):
         if form.is_valid():
             form.save()
         messages.success(request, "Le campus a été modifié avec succès !")
-        return redirect('/settings/campus/index')
+        return redirect('/campus')
     
 def delete_campus(request, id) :
     campus = Campus.objects.get(pk = id)
     campus.delete()
     messages.success(request,"Le campus a été supprimé avec succès !")
-    return redirect('/settings/campus/index')
+    return redirect('/campus')
