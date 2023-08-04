@@ -1,5 +1,5 @@
 from django.urls import path
-from app.views import home, student, attribution, application, bedroom, location, department, faculty
+from app.views import home, student, attribution, application, bedroom, location, department, faculty, campus, accommodation
 
 urlpatterns = [
     path('', home.index, name ='dashboard'),
@@ -52,5 +52,19 @@ urlpatterns = [
     path('faculty/edit/<int:id>', faculty.edit_faculty, name ='edit_faculty'),
     path('faculty/update/<int:id>', faculty.update_faculty, name ='update_faculty'),
     path('faculty/delete/<int:id>', faculty.delete_faculty, name ='delete_faculty'),
+
+    path('campus', campus.index, name ='view_campus'),
+    path('campus/add', campus.add_campus, name ='add_campus'),
+    path('campus/store', campus.store_campus, name ='store_campus'),
+    path('campus/edit/<int:id>', campus.edit_campus, name ='edit_campus'),
+    path('campus/update/<int:id>', campus.update_campus, name ='update_campus'),
+    path('campus/delete/<int:id>', campus.delete_campus, name ='delete_campus'),
+
+    path('accommodation', accommodation.index, name ='view_accommodation'),
+    path('accommodation/add', accommodation.add_accommodation, name ='add_accommodation'),
+    path('accommodation/store', accommodation.store_accommodation, name ='store_accommodation'),
+    path('accommodation/edit/<int:id>', accommodation.edit_accommodation, name ='edit_accommodation'),
+    path('accommodation/update/<int:id>', accommodation.update_accommodation, name ='update_accommodation'),
+    path('accommodation/delete/<int:id>', accommodation.delete_accommodation, name ='delete_accommodation'),
     
 ]
