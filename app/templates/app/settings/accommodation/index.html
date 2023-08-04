@@ -19,8 +19,8 @@
                             <th scope="col">ACTIONS</th>
                         </tr>
                     </thead>
-                    {% for accommodation in accommodations_list %}
                     <tbody>
+                        {% for accommodation in accommodations_list %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ accommodation.designation }}</td>
@@ -30,8 +30,8 @@
                                     class="hack1-btn">SUPPRIMER</a>
                             </td>
                         </tr>
+                        {% endfor %}
                     </tbody>
-                    {% endfor %}
                 </table>
             </div>
         </div>
