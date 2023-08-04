@@ -1,5 +1,5 @@
 from django.db import models
-from app.models import Faculty, Department
+from app.models import Faculty, Department, Campus
 
 class Student(models.Model) :
     GenderType = (
@@ -14,6 +14,7 @@ class Student(models.Model) :
     department = models.ForeignKey(Department, on_delete=models.CASCADE)
     inscription_number = models.PositiveIntegerField()
     inscription_date = models.DateField(auto_now_add=True)
+    campus = models.ForeignKey(Campus, on_delete=models.CASCADE)
     
     def __str__(self) -> str:
         return self.first_name+" - "+self.last_name
