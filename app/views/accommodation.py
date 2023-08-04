@@ -47,7 +47,7 @@ def store_accommodation(request):
             messages.success(request,"Le type de logement a été enregistré avec succès !")
         else :
             messages.error(request, form.errors)
-        return redirect('/settings/accommodation/index')
+        return redirect('/accommodation')
 
 def edit_accommodation(request, id):
     assert isinstance(request, HttpRequest)
@@ -81,10 +81,10 @@ def update_accommodation(request, id):
         if form.is_valid():
             form.save()
         messages.success(request, "Le type de logement a été modifié avec succès !")
-        return redirect('/settings/accommodation/index')
+        return redirect('/accommodation')
     
 def delete_accommodation(request, id) :
     accommodation = Accommodation.objects.get(pk = id)
     accommodation.delete()
     messages.success(request,"Le type de logement a été supprimé avec succès !")
-    return redirect('/settings/accommodation/index')
+    return redirect('/accommodation')

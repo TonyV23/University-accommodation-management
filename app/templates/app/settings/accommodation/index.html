@@ -19,14 +19,15 @@
                             <th scope="col">ACTIONS</th>
                         </tr>
                     </thead>
+                    {% for accommodation in accommodations_list %}
                     <tbody>
-                        {% for accommodation in accommodations_list %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ accommodation.designation }}</td>
                             <td>
                                 <a href="{% url 'edit_accommodation' accommodation.id %}" class="hack-btn">MODIFIER</a>
-                                <a href="{% url 'delete_accommodation' accommodation.id %}" class="hack1-btn">SUPPRIMER</a>
+                                <a href="{% url 'delete_accommodation' accommodation.id %}"
+                                    class="hack1-btn">SUPPRIMER</a>
                             </td>
                         </tr>
                     </tbody>

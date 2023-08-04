@@ -15,6 +15,7 @@ INSTALLED_APPS = [
     'app',
     'crispy_forms',
     'djmoney',
+    'crispy_bootstrap4'
 ]
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
