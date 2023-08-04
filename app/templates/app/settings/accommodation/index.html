@@ -9,30 +9,24 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">LES CHAMBRES DISPONIBLES</h5>
-                <a href="{% url 'add_bedroom' %}" class="hack2-btn">AJOUTER UNE CHAMBRE</a>
+                <h5 class="card-title">LES TYPES DE LOGEMENT DISPONIBLES</h5>
+                <a href="{% url 'add_accommodation' %}" class="hack2-btn">AJOUTER UN TYPE DE LOGEMENT</a>
                 <table class="table datatable">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">NUMERO</th>
-                            <th scope="col">CATEGORIE</th>
-                            <th scope="col">STATUS</th>
-                            <th scope="col">EMPLACEMENT</th>
+                            <th scope="col">DESIGNATION</th>
                             <th scope="col">ACTIONS</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {% for bedroom in bedrooms_list %}
+                        {% for accommodation in accommodations_list %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ bedroom.number }}</td>
-                            <td>{{ bedroom.category }}</td>
-                            <td>{{ bedroom.status }}</td>
-                            <td>{{ bedroom.bedroom }}</td>
+                            <td>{{ accommodation.designation }}</td>
                             <td>
-                                <a href="{% url 'edit_bedroom' bedroom.id %}" class="hack-btn">MODIFIER</a>
-                                <a href="{% url 'delete_bedroom' bedroom.id %}" class="hack1-btn">SUPPRIMER</a>
+                                <a href="{% url 'edit_accommodation' accommodation.id %}" class="hack-btn">MODIFIER</a>
+                                <a href="{% url 'delete_accommodation' accommodation.id %}" class="hack1-btn">SUPPRIMER</a>
                             </td>
                         </tr>
                     </tbody>
