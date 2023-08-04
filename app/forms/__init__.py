@@ -5,3 +5,5 @@ from .department import *
 from .faculty import *
 from .location import *
 from .student import *
+from .accommodation import *
+from .campus import *
