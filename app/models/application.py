@@ -9,6 +9,9 @@ class Application(models.Model) :
     application_letter = models.TextField(max_length=500)
     date_application = models.DateField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return self.student.last_name+ " - "+self.student.first_name
+
     class Meta :
          constraints = [
             models.UniqueConstraint(
