@@ -1,5 +1,5 @@
 from django.urls import path
-from app.views import home, student, attribution, application, bedroom, location, department, faculty, campus, accommodation
+from app.views import home, student, attribution, application, bedroom, location, department, faculty, campus, accommodation, auth
 
 urlpatterns = [
     path('', home.index, name ='dashboard'),
@@ -66,5 +66,15 @@ urlpatterns = [
     path('accommodation/edit/<int:id>', accommodation.edit_accommodation, name ='edit_accommodation'),
     path('accommodation/update/<int:id>', accommodation.update_accommodation, name ='update_accommodation'),
     path('accommodation/delete/<int:id>', accommodation.delete_accommodation, name ='delete_accommodation'),
-    
+
+    path ('login/', auth.login_user, name = 'login'),
+    path ('logout/', auth.logout_user, name = 'logout'),
+
+    path ('accounts/', auth.index, name = 'view_users'),
+    path ('accounts/add', auth.add_user, name = 'add_user'),
+    path ('accounts/store', auth.store_user, name = 'store_user'),
+    path ('accounts/edit/<int:id>', auth.edit_user, name = 'edit_user'),
+    path ('accounts/edit/<int:id>', auth.update_user, name = 'update_user'),
+    path ('accounts/delete/<int:id>', auth.delete_user, name = 'delete_user'),
+        
 ]

@@ -7,3 +7,5 @@ from .location import *
 from .student import *
 from .accommodation import *
 from .campus import *
+from .user_form import *
+from .user_change_form import *

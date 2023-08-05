@@ -1,0 +1,27 @@
+{% extends 'app/layouts/default.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="card">
+    <div class="card-body">
+      <h5 class="card-title">{{page_title}}</h5>
+
+      
+      <form class="row g-3" action="{% url 'update_user' form.instance.pk %}" method="post">
+        {% csrf_token %}
+        <div class="col-12">
+            {{ form|crispy }}
+        </div>
+
+        <div class="text-center">
+          <button type="submit" class="btn btn-primary">MODIFIER</button>
+          <button type="reset" class="btn btn-secondary">Reinitialiser</button>
+        </div>
+      </form>
+
+    </div>
+  </div>
+
+{% endblock %}
