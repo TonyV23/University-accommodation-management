@@ -18,6 +18,15 @@ class Attribution(models.Model):
     amount_paid = MoneyField(max_digits=14, decimal_places=2, null=True, default_currency='BIF')
     date_attribution = models.DateField(auto_now_add=True)
 
+    def delete_application(self):
+        self.student.delete()
+        self.delete()
+
+    def save(self, **kwargs):
+        if self.pk is not None:
+            self.delete_application()
+        super(Attribution, self).save(**kwargs)    
+
     class Meta:
         constraints = [
             models.UniqueConstraint(
