@@ -5,6 +5,21 @@
 {% load crispy_forms_tags %}
 
 <div class="card">
+  {% comment %} {% if messages %}
+  {% for message in messages %}
+  <p class="alert alert-success w-100 h-100">{{ message }} </p>
+  {% endfor %}
+  {% endif %} {% endcomment %}
+
+  {% if messages %}
+  {% for message in messages %}
+  <div class="alert alert-success alert-dismissible fade show" role="alert">
+      <i class="bi bi-check-circle me-1"></i>
+      {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+  {% endfor %}
+  {% endif %}
     <div class="card-body">
       <h5 class="card-title">{{page_title}}</h5>
 
