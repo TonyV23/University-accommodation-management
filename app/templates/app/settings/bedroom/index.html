@@ -47,7 +47,13 @@
                             <td>{{ bedroom.location }}</td>
                             <td>
                                 <a href="{% url 'edit_bedroom' bedroom.id %}" class="hack-btn">MODIFIER</a>
-                                <a href="{% url 'delete_bedroom' bedroom.id %}" class="hack1-btn">SUPPRIMER</a>
+                               
+                            </td>
+                            <td>
+                                <form action="{% url 'delete_bedroom' bedroom.id %}" method="post"></form>
+                                {% csrf_token %}
+                                <a onclick="return confirm('Voulez-vous vraiment supprimer cette chambre ?')"
+                                    class="hack1-btn">SUPPRIMER</a>
                             </td>
                         </tr>
                         {% endfor %}
