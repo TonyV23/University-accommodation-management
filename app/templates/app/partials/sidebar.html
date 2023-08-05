@@ -8,6 +8,19 @@
                 <span><Table>Tableau de bord</Table></span>
             </a>
         </li>
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'view_application' %}">
+                <i class="bi bi-grid"></i>
+                <span><Table>DEMANDE</Table></span>
+            </a>
+        </li>
+
+        <li class="nav-item">
+            <a class="nav-link " href="{% url 'view_attribution' %}">
+                <i class="bi bi-grid"></i>
+                <span><Table>ATTRIBUTION</Table></span>
+            </a>
+        </li>
 
         <li class="nav-item">
             <a class="nav-link collapsed" data-bs-target="#components-nav" data-bs-toggle="collapse" href="#">
@@ -50,20 +63,6 @@
                     </a>
                 </li>
             </ul>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link " href="{% url 'view_application' %}">
-                <i class="bi bi-grid"></i>
-                <span><Table>DEMANDE</Table></span>
-            </a>
-        </li>
-
-        <li class="nav-item">
-            <a class="nav-link " href="{% url 'view_attribution' %}">
-                <i class="bi bi-grid"></i>
-                <span><Table>ATTRIBUTION</Table></span>
-            </a>
         </li>
     </ul>
 

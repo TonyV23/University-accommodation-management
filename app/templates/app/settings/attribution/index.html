@@ -17,6 +17,8 @@
                             <th scope="col">#</th>
                             <th scope="col">ETUDIANT (E)</th>
                             <th scope="col">CHAMBRE</th>
+                            <th scope="col">MOYEN DE PAIEMENT</th>
+                            <th scope="col">MONTANT PAYE</th>
                             <th scope="col">DATE ATTRIBUTION</th>
                             <th scope="col">ACTIONS</th>
                         </tr>
@@ -27,7 +29,9 @@
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ attribution.student }}</td>
                             <td>{{ attribution.bedroom }}</td>
-                            <td>{{ attribution.date_application }}</td>
+                            <td>{{ attribution.payment_method }}</td>
+                            <td>{{ attribution.amount_paid }}</td>
+                            <td>{{ attribution.date_attribution }}</td>
                             <td>
                                 <a href="{% url 'edit_attribution' attribution.id %}" class="hack-btn">MODIFIER</a>
                                 <a href="{% url 'delete_attribution' attribution.id %}" class="hack1-btn">SUPPRIMER</a>
