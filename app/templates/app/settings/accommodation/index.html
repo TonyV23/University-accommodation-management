@@ -17,7 +17,7 @@
         <i class="bi bi-check-circle me-1"></i>
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-    </div>
+      </div>
     {% endfor %}
     {% endif %}
     <div class="col-lg-12">
@@ -40,11 +40,7 @@
                             <td>{{ accommodation.designation }}</td>
                             <td>
                                 <a href="{% url 'edit_accommodation' accommodation.id %}" class="hack-btn">MODIFIER</a>
-                            </td>
-                            <td>
-                                <form action="{% url 'delete_accommodation' accommodation.id %}" method="post"></form>
-                                {% csrf_token %}
-                                <a onclick="return confirm('Voulez-vous vraiment supprimer ce type de logement ?')"
+                                <a href="{% url 'delete_accommodation' accommodation.id %}"
                                     class="hack1-btn">SUPPRIMER</a>
                             </td>
                         </tr>

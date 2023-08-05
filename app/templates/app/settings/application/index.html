@@ -49,12 +49,7 @@
                             <td>{{ application.date_application }}</td>
                             <td>
                                 <a href="{% url 'edit_application' application.id %}" class="hack-btn">MODIFIER</a>
-                            </td>
-                            <td>
-                                <form action="{% url 'delete_application' application.id %}" method="post"></form>
-                                {% csrf_token %}
-                                <a onclick="return confirm('Voulez-vous vraiment supprimer cette demande ?')"
-                                    class="hack1-btn">SUPPRIMER</a>
+                                <a href="{% url 'delete_application' application.id %}" class="hack1-btn">SUPPRIMER</a>
                             </td>
                         </tr>
                         {% endfor %}
