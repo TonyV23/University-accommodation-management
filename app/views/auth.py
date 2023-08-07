@@ -97,14 +97,16 @@ def edit_user(request, id) :
             user = User.objects.get(pk=id)
             form = UserEditInfoForm(instance=user)
 
-        return HttpResponse(render(
+        template = "app/settings/users/edit.html"
+        context = {
+            'page_title' : page_title,
+            'form' : form
+        }
+        return render(
             request,
-            'app/settings/users/edit.html',
-            {
-                'form': form,
-                'page_title' :page_title
-            }
-        ))
+            template_name = template,
+            context= context
+        )
 
 # @login_required(login_url ='login')
 def update_user(request, id) :
@@ -116,7 +118,7 @@ def update_user(request, id) :
             form = UserEditInfoForm(request.POST, instance=user)
         if form.is_valid():
             form.save()
-            messages.success(request, "Les informations de l'étudiant ont été modifié avec succès !")
+        messages.success(request, "Les informations de l'étudiant ont été modifié avec succès !")
         return redirect('/accounts') 
 
 def logout_user(request) :
@@ -129,3 +131,4 @@ def delete_user(request, id) :
     user = User.objects.get(pk = id)
     user.delete()
     messages.success(request, 'Le compte a été supprimé avec succès')
+    return redirect('/accounts')
