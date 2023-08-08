@@ -32,7 +32,6 @@
                             <th scope="col">EMAIL</th>
                             <th scope="col">USERNAME</th>
                             <th scope="col">DERNIERE CONNEXION</th>
-                            <th scope="col">CONNECTE</th>
                             <th scope="col">ACTIONS</th>
                         </tr>
                     </thead>
@@ -45,11 +44,9 @@
                             <td scope="row">{{ user.email }}</td>
                             <td scope="row">{{ user.username }}</td>
                             <td scope="row">{{ user.last_login }}</td>
-                            <td scope="row">{{ user.is_active }}</td>
                             <td>
                                 <a href="{% url 'edit_user' user.id %}" class="hack-btn">MODIFIER</a>
-                                <a href="{% url 'delete_user' user.id %}"
-                                    class="hack1-btn">SUPPRIMER</a>
+                                <a href="{% url 'delete_user' user.id %}" class="hack1-btn">SUPPRIMER</a>
                             </td>
                         </tr>
                         {% endfor %}

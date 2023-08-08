@@ -92,4 +92,4 @@ def delete_attribution(request, id) :
     messages.success(request,"L'attribution a été supprimé avec succès !")
     return redirect('/attribution')
 
-
+    
