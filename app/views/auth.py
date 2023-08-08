@@ -66,17 +66,15 @@ def login_user(request) :
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/dashboard')
+            return redirect('/')
         else:
             messages.info(request, 'Nom d\'utilisateur ou mot de passe incorrect')
 
-    page_title = 'Connexion'
+    page_title = 'Se connecter'
     template  = 'app/settings/users/login.html'
     
     variable = {
-
         'page_title' : page_title
-
     }
 
     return render(
