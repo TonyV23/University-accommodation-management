@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from app.forms import BedroomForm
 from app.models import Location
 from app.models import BedRoom
 
+@login_required(login_url ='login')
 def index(request):
     page_title = 'Liste des chambres'
     bedrooms_list = BedRoom.objects.all()
@@ -21,6 +23,7 @@ def index(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def add_bedroom(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une chambre'
@@ -41,6 +44,7 @@ def add_bedroom(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def store_bedroom(request):
     if request.method == 'POST':
         form =  BedroomForm(request.POST)
@@ -51,6 +55,7 @@ def store_bedroom(request):
             messages.error(request, form.errors)
         return redirect('/bedroom')
 
+@login_required(login_url ='login')
 def edit_bedroom(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier la chambre'
@@ -73,6 +78,7 @@ def edit_bedroom(request, id):
             context=context  
     )
 
+@login_required(login_url ='login')
 def update_bedroom(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -85,6 +91,7 @@ def update_bedroom(request, id):
         messages.success(request, "La chambre a été modifié avec succès !")
         return redirect('/bedroom')
     
+@login_required(login_url ='login')    
 def delete_bedroom(request, id) :
     bedroom = BedRoom.objects.get(pk = id)
     bedroom.delete()

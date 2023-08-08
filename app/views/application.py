@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from app.forms import ApplicationForm
 from app.models import Application
 
+@login_required(login_url ='login')
 def index(request) :
     page_title = 'Liste des demandes'
     template = 'app/settings/application/index.html'
@@ -20,6 +22,7 @@ def index(request) :
         context=context  
     )
 
+@login_required(login_url ='login')
 def add_application(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Faire une demande'
@@ -39,6 +42,7 @@ def add_application(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def store_application(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
@@ -49,6 +53,7 @@ def store_application(request):
             messages.error(request, form.errors)
         return redirect('/application')
 
+@login_required(login_url ='login')
 def edit_application(request, id):
     assert isinstance(request, HttpRequest)
     page_title = "Modifier la demande "
@@ -71,6 +76,7 @@ def edit_application(request, id):
             context=context  
     )
 
+@login_required(login_url ='login')
 def update_application(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -83,6 +89,7 @@ def update_application(request, id):
         messages.success(request, "La demande a été modifié avec succès !")
         return redirect('/application')
     
+@login_required(login_url ='login')    
 def delete_application(request, id) :
     application = Application.objects.get(pk = id)
     application.delete()

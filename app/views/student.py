@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from app.forms import StudentForm
 from app.models import Student, Faculty, Department
 
+@login_required(login_url ='login')
 def index(request):
     page_title = 'Liste des etudiants'
     students_list = Student.objects.all()
@@ -20,6 +22,7 @@ def index(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def add_student(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter un etudiant'
@@ -42,6 +45,7 @@ def add_student(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def store_student(request):
     if request.method == 'POST':
         form =  StudentForm(request.POST)
@@ -52,6 +56,7 @@ def store_student(request):
             messages.error(request, form.errors)
         return redirect('/student')
 
+@login_required(login_url ='login')
 def edit_student(request, id):
     assert isinstance(request, HttpRequest)
     page_title = "Modifier l' etudiant"
@@ -74,6 +79,7 @@ def edit_student(request, id):
             context=context  
     )
 
+@login_required(login_url ='login')
 def update_student(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -85,7 +91,8 @@ def update_student(request, id):
             form.save()
         messages.success(request, "L' etudiant a été modifié avec succès !")
         return redirect('/student')
-    
+
+@login_required(login_url ='login')    
 def delete_student(request, id) :
     student = Student.objects.get(pk = id)
     student.delete()

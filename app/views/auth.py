@@ -1,5 +1,5 @@
 from django.shortcuts import redirect, render, HttpResponse
-from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -10,7 +10,7 @@ from app.forms import UserForm, UserEditInfoForm
 from app.decorators import unauthenticated_user, allowed_users
 
     
-# @login_required(login_url ='login')
+@login_required(login_url ='login')
 def index(request) :
     page_title = 'Comptes des étudiants'
     users = User.objects.all()
@@ -27,7 +27,7 @@ def index(request) :
         context = variable
     )
 
-# @login_required(login_url ='login')
+@login_required(login_url ='login')
 def add_user(request) :
     page_title = 'Nouveau compte'
     template = 'app/settings/users/add.html'
@@ -44,7 +44,7 @@ def add_user(request) :
         context = variable
     )
 
-# @login_required(login_url ='login')
+@login_required(login_url ='login')
 def store_user(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -57,7 +57,7 @@ def store_user(request):
         
         return redirect('/accounts')
 
-# @unauthenticated_user
+@unauthenticated_user
 def login_user(request) :
     if request.method == 'POST':
         username = request.POST.get('username')
@@ -66,17 +66,15 @@ def login_user(request) :
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)
-            return redirect('/dashboard')
+            return redirect('/')
         else:
             messages.info(request, 'Nom d\'utilisateur ou mot de passe incorrect')
 
-    page_title = 'Connexion'
+    page_title = 'Se connecter'
     template  = 'app/settings/users/login.html'
     
     variable = {
-
         'page_title' : page_title
-
     }
 
     return render(
@@ -85,8 +83,8 @@ def login_user(request) :
         context = variable
     )
 
-# @login_required(login_url ='login')
-# @allowed_users(allowed_roles= ['admins'])
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def edit_user(request, id) :
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier les informations de l\'étudiant'
@@ -108,7 +106,7 @@ def edit_user(request, id) :
             context= context
         )
 
-# @login_required(login_url ='login')
+@login_required(login_url ='login')
 def update_user(request, id) :
     if request.method == 'POST':
         if id == 0:
@@ -126,7 +124,7 @@ def logout_user(request) :
 
     return redirect('/login')
 
-# @login_required(login_url ='login')
+@login_required(login_url ='login')
 def delete_user(request, id) :
     user = User.objects.get(pk = id)
     user.delete()

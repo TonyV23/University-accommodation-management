@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from app.forms import FacultyForm
 from app.models import Faculty
 
+@login_required(login_url ='login')
 def index(request) :
     page_title = 'Liste des facultés'
     template = 'app/settings/faculty/index.html'
@@ -20,6 +22,7 @@ def index(request) :
         context=context  
     )
 
+@login_required(login_url ='login')
 def add_faculty(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une faculté'
@@ -39,6 +42,7 @@ def add_faculty(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def store_faculty(request):
     if request.method == 'POST':
         form = FacultyForm(request.POST)
@@ -49,6 +53,7 @@ def store_faculty(request):
             messages.error(request, form.errors)
         return redirect('/faculty')
 
+@login_required(login_url ='login')
 def edit_faculty(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier la faculté'
@@ -71,6 +76,7 @@ def edit_faculty(request, id):
             context=context  
     )
 
+@login_required(login_url ='login')
 def update_faculty (request, id):
     if request.method == 'POST':
         if id == 0:
@@ -83,6 +89,7 @@ def update_faculty (request, id):
         messages.success(request, "La faculté a été modifié avec succès !")
         return redirect('/faculty')
     
+@login_required(login_url ='login')    
 def delete_faculty (request, id) :
     faculty = Faculty.objects.get(pk = id)
     faculty.delete()
