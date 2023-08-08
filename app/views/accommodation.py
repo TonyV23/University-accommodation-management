@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from app.forms import AccommodationForm
 from app.models import Accommodation
 
+@login_required(login_url ='login')
 def index(request) :
     page_title = 'Liste des types de logements'
     template = 'app/settings/accommodation/index.html'
@@ -20,6 +22,7 @@ def index(request) :
         context=context  
     )
 
+@login_required(login_url ='login')
 def add_accommodation(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter un type de logement'
@@ -39,6 +42,7 @@ def add_accommodation(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def store_accommodation(request):
     if request.method == 'POST':
         form = AccommodationForm(request.POST)
@@ -49,6 +53,7 @@ def store_accommodation(request):
             messages.error(request, form.errors)
         return redirect('/accommodation')
 
+@login_required(login_url ='login')
 def edit_accommodation(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier le type de logement'
@@ -71,6 +76,7 @@ def edit_accommodation(request, id):
             context=context  
     )
 
+@login_required(login_url ='login')
 def update_accommodation(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -82,7 +88,8 @@ def update_accommodation(request, id):
             form.save()
         messages.success(request, "Le type de logement a été modifié avec succès !")
         return redirect('/accommodation')
-    
+
+@login_required(login_url ='login')    
 def delete_accommodation(request, id) :
     accommodation = Accommodation.objects.get(pk = id)
     accommodation.delete()

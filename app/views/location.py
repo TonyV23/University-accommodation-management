@@ -1,10 +1,12 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from app.forms import LocationForm
 from app.models import Location
 
+@login_required(login_url ='login')
 def index(request) :
     page_title = 'Liste des emplacements'
     template = 'app/settings/location/index.html'
@@ -20,6 +22,7 @@ def index(request) :
         context=context  
     )
 
+@login_required(login_url ='login')
 def add_location(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une localisation'
@@ -39,6 +42,7 @@ def add_location(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def store_location(request):
     if request.method == 'POST':
         form = LocationForm(request.POST)
@@ -49,6 +53,7 @@ def store_location(request):
             messages.error(request, form.errors)
         return redirect('/location')
 
+@login_required(login_url ='login')
 def edit_location(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier la localisation'
@@ -71,6 +76,7 @@ def edit_location(request, id):
             context=context  
     )
 
+@login_required(login_url ='login')
 def update_location(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -83,6 +89,7 @@ def update_location(request, id):
         messages.success(request, "La localisation a été modifié avec succès !")
         return redirect('/location')
     
+@login_required(login_url ='login')    
 def delete_location(request, id) :
     location = Location.objects.get(pk = id)
     location.delete()

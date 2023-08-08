@@ -1,11 +1,13 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.http import HttpRequest
+from django.contrib.auth.decorators import login_required
 
 from app.forms import DepartmentForm
 from app.models import Faculty
 from app.models import Department
 
+@login_required(login_url ='login')
 def index(request):
     page_title = 'Liste des departments'
     departments_list = Department.objects.all()
@@ -21,6 +23,7 @@ def index(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def add_department(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter un department'
@@ -41,6 +44,7 @@ def add_department(request):
         context=context  
     )
 
+@login_required(login_url ='login')
 def store_department(request):
     if request.method == 'POST':
         form =  DepartmentForm(request.POST)
@@ -51,6 +55,7 @@ def store_department(request):
             messages.error(request, form.errors)
         return redirect('/department')
 
+@login_required(login_url ='login')
 def edit_department(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier le department'
@@ -73,6 +78,7 @@ def edit_department(request, id):
             context=context  
     )
 
+@login_required(login_url ='login')
 def update_department(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -84,7 +90,8 @@ def update_department(request, id):
             form.save()
         messages.success(request, "Le department a été modifié avec succès !")
         return redirect('/department')
-    
+
+@login_required(login_url ='login')    
 def delete_department(request, id) :
     department = Department.objects.get(pk = id)
     department.delete()
