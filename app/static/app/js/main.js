@@ -1,10 +1,41 @@
-/**
-* Template Name: NiceAdmin
-* Updated: May 30 2023 with Bootstrap v5.3.0
-* Template URL: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/
-* Author: BootstrapMade.com
-* License: https://bootstrapmade.com/license/
-*/
+// my own function to get department By faculty
+
+// GetCommune by province_id
+// GetFaculty by faculty_id
+$(function () {
+  $("#id_nom_de_la_province").on("change", function () {
+    id_nom_de_la_province = $(this).val();
+    //alert(id_nom_de_la_province);
+    $.get(
+      "/refugees/getCommunes",
+      {
+        id_nom_de_la_province: id_nom_de_la_province,
+      },
+      function (data, textStatus, jqXHR) {
+        $("#id_nom_de_la_commune").html(data);
+      }
+    );
+  });
+});
+
+$(function () {
+  $("#id_province").on("change", function () {
+    id_province = $(this).val();
+    //alert(id_province);
+    $.get(
+      "/distributions/getCommunes",
+      {
+        id_province: id_province,
+      },
+      function (data, textStatus, jqXHR) {
+        $("#id_commune").html(data);
+      }
+    );
+  });
+});
+
+
+
 (function() {
   "use strict";
 
