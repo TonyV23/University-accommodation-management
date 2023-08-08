@@ -8,7 +8,6 @@
 
     <main>
         <div class="container">
-
             <section
                 class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
                 <div class="container">
@@ -29,31 +28,42 @@
                                     <div class="pt-4 pb-2">
                                         <h5 class="card-title text-center pb-0 fs-4">Se connecter</h5>
                                     </div>
+                                    {% comment %} {% if messages %}
+                                    {% for message in messages %}
+                                    <p class="alert alert-success w-100 h-100">{{ message }} </p>
+                                    {% endfor %}
+                                    {% endif %} {% endcomment %}
 
-                                    <form class="row g-3 needs-validation" novalidate>
+                                    {% if messages %}
+                                    {% for message in messages %}
+                                    <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                        {{ message }}
+                                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    {% endfor %}
+                                    {% endif %}
+
+                                    <form action="" method="post" class="row g-3">
                                         {% csrf_token %}
                                         <div class="col-12">
-                                            <label for="yourUsername" class="form-label">Nom utilisateur</label>
-                                            <div class="input-group has-validation">
-                                                <span class="input-group-text" id="inputGroupPrepend">@</span>
-                                                <input type="text" name="username" class="form-control"
-                                                    id="yourUsername" required>
-                                                <div class="invalid-feedback">Veuillez saisir votre nom d'utilisateur.</div>
+                                            <label for="username" class="form-label">Nom utilisateur</label>
+                                            <div class="input-group">
+                                                <input type="text" name="username" class="form-control" id="username"
+                                                    required autocomplete="">
                                             </div>
                                         </div>
 
                                         <div class="col-12">
-                                            <label for="yourPassword" class="form-label">Mot de passe</label>
-                                            <input type="password" name="password" class="form-control"
-                                                id="yourPassword" required>
-                                            <div class="invalid-feedback">Veuillez saisir votre mot de passe !</div>
+                                            <label for="password" class="form-label">Mot de passe</label>
+                                            <input type="password" name="password" class="form-control" id="password"
+                                                required>
                                         </div>
 
                                         <div class="col-12 p-2">
                                             <button class="btn btn-primary w-100" type="submit">Se connecter</button>
                                         </div>
                                     </form>
-
                                 </div>
                             </div>
                         </div>
