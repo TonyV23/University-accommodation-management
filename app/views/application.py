@@ -6,6 +6,7 @@ from django.contrib.auth.decorators import login_required
 from app.forms import ApplicationForm
 from app.models import Application
 
+
 @login_required(login_url ='login')
 def index(request) :
     page_title = 'Liste des demandes'
