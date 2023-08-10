@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 
 from app.models import Student, BedRoom, Application, Attribution
+from app.decorators import admin_only
 
 
 @login_required(login_url ='login')
+@admin_only
 def index(request) :
     
     page_title = 'Tableau de Bord'
