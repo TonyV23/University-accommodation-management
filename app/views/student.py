@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 
 from app.forms import StudentForm
 from app.models import Student, Faculty, Department
+from app.decorators import allowed_users
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request):
     page_title = 'Liste des etudiants'
     students_list = Student.objects.all()
@@ -23,6 +25,7 @@ def index(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def add_student(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter un etudiant'
@@ -46,6 +49,7 @@ def add_student(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def store_student(request):
     if request.method == 'POST':
         form =  StudentForm(request.POST)
@@ -57,6 +61,7 @@ def store_student(request):
         return redirect('/student')
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def edit_student(request, id):
     assert isinstance(request, HttpRequest)
     page_title = "Modifier l' etudiant"
@@ -80,6 +85,7 @@ def edit_student(request, id):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def update_student(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -92,7 +98,8 @@ def update_student(request, id):
         messages.success(request, "L' etudiant a été modifié avec succès !")
         return redirect('/student')
 
-@login_required(login_url ='login')    
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])    
 def delete_student(request, id) :
     student = Student.objects.get(pk = id)
     student.delete()

@@ -6,8 +6,10 @@ from django.contrib.auth.decorators import login_required
 from app.forms import DepartmentForm
 from app.models import Faculty
 from app.models import Department
+from app.decorators import allowed_users
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request):
     page_title = 'Liste des departments'
     departments_list = Department.objects.all()
@@ -24,6 +26,7 @@ def index(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def add_department(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter un department'
@@ -45,6 +48,7 @@ def add_department(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def store_department(request):
     if request.method == 'POST':
         form =  DepartmentForm(request.POST)
@@ -56,6 +60,7 @@ def store_department(request):
         return redirect('/department')
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def edit_department(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier le department'
@@ -79,6 +84,7 @@ def edit_department(request, id):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def update_department(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -91,7 +97,8 @@ def update_department(request, id):
         messages.success(request, "Le department a été modifié avec succès !")
         return redirect('/department')
 
-@login_required(login_url ='login')    
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])    
 def delete_department(request, id) :
     department = Department.objects.get(pk = id)
     department.delete()

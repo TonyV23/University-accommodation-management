@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 
 from app.forms import AttributionForm
 from app.models import Attribution, Student, BedRoom
+from app.decorators import allowed_users
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request):
     page_title = 'Liste des attributions des chambres'
     attribution_list = Attribution.objects.all()
@@ -23,6 +25,7 @@ def index(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def add_attribution(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Faire une attribution'
@@ -46,6 +49,7 @@ def add_attribution(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def store_attribution(request):
     if request.method == 'POST':
         form =  AttributionForm(request.POST)
@@ -57,6 +61,7 @@ def store_attribution(request):
         return redirect('/attribution')
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def edit_attribution(request, id):
     assert isinstance(request, HttpRequest)
     page_title = "Modifier l'attribution"
@@ -80,6 +85,7 @@ def edit_attribution(request, id):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def update_attribution(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -92,7 +98,8 @@ def update_attribution(request, id):
         messages.success(request, "L'attribution a été modifié avec succès !")
         return redirect('/attribution')
 
-@login_required(login_url ='login')    
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])    
 def delete_attribution(request, id) :
     attribution = Attribution.objects.get(pk = id)
     attribution.delete()

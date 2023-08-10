@@ -5,9 +5,11 @@ from django.contrib.auth.decorators import login_required
 
 from app.forms import CampusForm
 from app.models import Campus
+from app.decorators import allowed_users
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request):
     page_title = 'Liste des campus'
     template = 'app/settings/campus/index.html'
@@ -25,6 +27,7 @@ def index(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles= ['admins'])
 def add_campus(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter un campus'
@@ -46,6 +49,7 @@ def add_campus(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles= ['admins'])
 def store_campus(request):
     if request.method == 'POST':
         form = CampusForm(request.POST)
@@ -59,6 +63,7 @@ def store_campus(request):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles= ['admins'])
 def edit_campus(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier le campus'
@@ -83,6 +88,7 @@ def edit_campus(request, id):
 
 
 @login_required(login_url='login')
+@allowed_users(allowed_roles= ['admins'])
 def update_campus(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -96,6 +102,7 @@ def update_campus(request, id):
         return redirect('/campus')
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def delete_campus(request, id):
     campus = Campus.objects.get(pk=id)
     campus.delete()

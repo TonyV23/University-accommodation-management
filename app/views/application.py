@@ -5,8 +5,11 @@ from django.contrib.auth.decorators import login_required
 
 from app.forms import ApplicationForm
 from app.models import Application
+from app.decorators import allowed_users
+
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins', 'students'])
 def index(request) :
     page_title = 'Liste des demandes'
     template = 'app/settings/application/index.html'
@@ -23,6 +26,7 @@ def index(request) :
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins', 'students'])
 def add_application(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Faire une demande'
@@ -43,6 +47,7 @@ def add_application(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins', 'students'])
 def store_application(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
@@ -54,6 +59,7 @@ def store_application(request):
         return redirect('/application')
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins', 'students'])
 def edit_application(request, id):
     assert isinstance(request, HttpRequest)
     page_title = "Modifier la demande "
@@ -77,6 +83,7 @@ def edit_application(request, id):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins', 'students'])
 def update_application(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -90,6 +97,7 @@ def update_application(request, id):
         return redirect('/application')
     
 @login_required(login_url ='login')    
+@allowed_users(allowed_roles= ['admins', 'students'])
 def delete_application(request, id) :
     application = Application.objects.get(pk = id)
     application.delete()

@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 
 from app.forms import FacultyForm
 from app.models import Faculty
+from app.decorators import allowed_users
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request) :
     page_title = 'Liste des facultés'
     template = 'app/settings/faculty/index.html'
@@ -23,6 +25,7 @@ def index(request) :
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def add_faculty(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une faculté'
@@ -43,6 +46,7 @@ def add_faculty(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def store_faculty(request):
     if request.method == 'POST':
         form = FacultyForm(request.POST)
@@ -54,6 +58,7 @@ def store_faculty(request):
         return redirect('/faculty')
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def edit_faculty(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier la faculté'
@@ -77,6 +82,7 @@ def edit_faculty(request, id):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def update_faculty (request, id):
     if request.method == 'POST':
         if id == 0:
@@ -89,7 +95,8 @@ def update_faculty (request, id):
         messages.success(request, "La faculté a été modifié avec succès !")
         return redirect('/faculty')
     
-@login_required(login_url ='login')    
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])    
 def delete_faculty (request, id) :
     faculty = Faculty.objects.get(pk = id)
     faculty.delete()

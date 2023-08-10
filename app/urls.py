@@ -76,5 +76,7 @@ urlpatterns = [
     path ('accounts/edit/<int:id>', auth.edit_user, name = 'edit_user'),
     path ('accounts/update/<int:id>', auth.update_user, name = 'update_user'),
     path ('accounts/delete/<int:id>', auth.delete_user, name = 'delete_user'),
+
+    path ('studentDashboard', home.index_student, name = 'student_dashboard'),
         
 ]
