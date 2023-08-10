@@ -6,8 +6,10 @@ from django.contrib.auth.decorators import login_required
 from app.forms import BedroomForm
 from app.models import Location
 from app.models import BedRoom
+from app.decorators import allowed_users
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request):
     page_title = 'Liste des chambres'
     bedrooms_list = BedRoom.objects.all()
@@ -24,6 +26,7 @@ def index(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def add_bedroom(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une chambre'
@@ -45,6 +48,7 @@ def add_bedroom(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def store_bedroom(request):
     if request.method == 'POST':
         form =  BedroomForm(request.POST)
@@ -56,6 +60,7 @@ def store_bedroom(request):
         return redirect('/bedroom')
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def edit_bedroom(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier la chambre'
@@ -79,6 +84,7 @@ def edit_bedroom(request, id):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def update_bedroom(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -91,7 +97,8 @@ def update_bedroom(request, id):
         messages.success(request, "La chambre a été modifié avec succès !")
         return redirect('/bedroom')
     
-@login_required(login_url ='login')    
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])    
 def delete_bedroom(request, id) :
     bedroom = BedRoom.objects.get(pk = id)
     bedroom.delete()

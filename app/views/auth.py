@@ -11,6 +11,7 @@ from app.decorators import unauthenticated_user, allowed_users
 
     
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request) :
     page_title = 'Comptes des étudiants'
     users = User.objects.all()
@@ -28,6 +29,7 @@ def index(request) :
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def add_user(request) :
     page_title = 'Nouveau compte'
     template = 'app/settings/users/add.html'
@@ -45,6 +47,7 @@ def add_user(request) :
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def store_user(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -107,6 +110,7 @@ def edit_user(request, id) :
         )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def update_user(request, id) :
     if request.method == 'POST':
         if id == 0:
@@ -125,6 +129,7 @@ def logout_user(request) :
     return redirect('/login')
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def delete_user(request, id) :
     user = User.objects.get(pk = id)
     user.delete()

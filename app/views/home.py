@@ -33,3 +33,16 @@ def index(request) :
         template_name = template,
         context = context
     )
+
+def index_student(request) :
+    page_title = 'Accueil'
+    template = 'app/home/index_student.html'
+    context = {
+        'page_title' : page_title,
+    }
+
+    return render(
+        request,
+        template_name=template,
+        context=context
+    )
