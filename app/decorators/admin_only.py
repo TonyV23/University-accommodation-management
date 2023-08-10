@@ -8,6 +8,6 @@ def admin_only(view_func) :
         if group == 'admins' :
             return view_func(request, *args, **kwargs)
         if group == 'students' :
-            return redirect('/employeeDashboard')
+            return redirect('/studentDashboard')
 
     return wrapper_func

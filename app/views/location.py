@@ -5,8 +5,10 @@ from django.contrib.auth.decorators import login_required
 
 from app.forms import LocationForm
 from app.models import Location
+from app.decorators import allowed_users
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def index(request) :
     page_title = 'Liste des emplacements'
     template = 'app/settings/location/index.html'
@@ -23,6 +25,7 @@ def index(request) :
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def add_location(request):
     assert isinstance(request, HttpRequest)
     page_title = 'Ajouter une localisation'
@@ -43,6 +46,7 @@ def add_location(request):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def store_location(request):
     if request.method == 'POST':
         form = LocationForm(request.POST)
@@ -54,6 +58,7 @@ def store_location(request):
         return redirect('/location')
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def edit_location(request, id):
     assert isinstance(request, HttpRequest)
     page_title = 'Modifier la localisation'
@@ -77,6 +82,7 @@ def edit_location(request, id):
     )
 
 @login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
 def update_location(request, id):
     if request.method == 'POST':
         if id == 0:
@@ -89,7 +95,8 @@ def update_location(request, id):
         messages.success(request, "La localisation a été modifié avec succès !")
         return redirect('/location')
     
-@login_required(login_url ='login')    
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])    
 def delete_location(request, id) :
     location = Location.objects.get(pk = id)
     location.delete()
