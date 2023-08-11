@@ -2,6 +2,11 @@
 
 {% block content %}
 <div class="content">
+    {% if attribution %}
+        <p>Your application was attributed on {{ attribution.date_attribution }}</p>
+    {% else %}
+        <p>Your application was not attributed yet.</p>
+    {% endif %}
 
 
 </div>
