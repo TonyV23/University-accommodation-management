@@ -30,7 +30,7 @@ def index(request) :
 def index_student(request) :
     page_title = 'Liste des demandes'
     template = 'app/settings/application/index_student.html'
-    application_list = Application.objects.all()
+    application_list = Application.objects.filter(created_by=request.user)
     context = {
             'page_title' : page_title,
             'application_list':application_list
