@@ -12,8 +12,8 @@ def update_bedroom_status(sender, instance, created, **kwargs):
 
 class Attribution(models.Model):
     payment_mode = (('via banque', 'via banque'), ('cash', 'cash'))
-    student = models.ForeignKey(Application, on_delete=models.CASCADE)
-    bedroom = models.ForeignKey(BedRoom, on_delete=models.CASCADE)
+    student = models.OneToOneField(Application, on_delete=models.CASCADE)
+    bedroom = models.OneToOneField(BedRoom, on_delete=models.CASCADE)
     payment_method = models.CharField(choices=payment_mode, max_length=20)
     amount_paid = MoneyField(max_digits=14, decimal_places=2, null=True, default_currency='BIF')
     date_attribution = models.DateField(auto_now_add=True)
@@ -25,14 +25,6 @@ class Attribution(models.Model):
     def save(self, **kwargs):
         if self.pk is not None:
             self.delete_application()
-        super(Attribution, self).save(**kwargs)    
-
-    class Meta:
-        constraints = [
-            models.UniqueConstraint(
-                fields=['student', 'bedroom', 'date_attribution'],
-                name='unique_attribution'
-            )
-        ]
+        super(Attribution, self).save(**kwargs)
 
 post_save.connect(update_bedroom_status, sender=Attribution)
