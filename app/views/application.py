@@ -105,7 +105,7 @@ def store_application_student(request):
         form = ApplicationForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(request,"La demande a été enregistré avec succès !")
+            messages.success(request,"Votre demande a été envoyé avec succès !")
         else :
             messages.error(request, form.errors)
         return redirect('/applicationStudent')
@@ -115,7 +115,7 @@ def store_application_student(request):
 @allowed_users(allowed_roles= ['admins', 'students'])
 def edit_application(request, id):
     assert isinstance(request, HttpRequest)
-    page_title = "Modifier la demande "
+    page_title = "Visualiser la demande "
     if request.method == 'GET':
         if id == 0:
             form = ApplicationForm()
@@ -170,7 +170,7 @@ def update_application(request, id):
             form = ApplicationForm(request.POST, instance=application)
         if form.is_valid():
             form.save()
-        messages.success(request, "La demande a été modifié avec succès !")
+        # messages.success(request, "La demande a été modifié avec succès !")
         return redirect('/application')
     
 @login_required(login_url ='login')
