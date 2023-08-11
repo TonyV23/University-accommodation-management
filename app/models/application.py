@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 class Application(models.Model) :
        
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
-    accommodation = models.OneToOneField(Accommodation, on_delete=models.CASCADE)
+    accommodation = models.ForeignKey(Accommodation, on_delete=models.CASCADE, null=True)
     residence_card_number = models.CharField(max_length=20)
     application_letter = models.TextField(max_length=500)
     date_application = models.DateField(auto_now_add=True)
