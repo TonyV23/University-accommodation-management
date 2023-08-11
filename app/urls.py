@@ -25,6 +25,14 @@ urlpatterns = [
     path('application/update/<int:id>', application.update_application, name ='update_application'),
     path('application/delete/<int:id>', application.delete_application, name ='delete_application'),
 
+
+    path('applicationStudent', application.index_student, name ='view_application_student'),
+    path('applicationStudent/add', application.add_application_student, name ='add_application_student'),
+    path('applicationStudent/store', application.store_application_student, name ='store_application_student'),
+    path('applicationStudent/edit/<int:id>', application.edit_application_student, name ='edit_application_student'),
+    path('applicationStudent/update/<int:id>', application.update_application_student, name ='update_application_student'),
+    path('applicationStudent/delete/<int:id>', application.delete_application_student, name ='delete_application_student'),
+
     path('bedroom', bedroom.index, name ='view_bedroom'),
     path('bedroom/add', bedroom.add_bedroom, name ='add_bedroom'),
     path('bedroom/store', bedroom.store_bedroom, name ='store_bedroom'),
