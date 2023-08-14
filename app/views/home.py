@@ -41,27 +41,13 @@ def index_student(request):
     page_title = 'Accueil'
     template = 'app/home/index_student.html'
 
-    student_id = request.user.id
-    application = Application.objects.filter(student=student_id).first()
-    attribution = None
-
-    if application:
-        attribution = Attribution.objects.filter(student=application).first()
-
-        if attribution:
-            response = HttpResponse(content="Your application was attributed on {}.".format(attribution.date_attribution))
-            response['Content-Type'] = 'text/plain'
-
-        else:
-            response = HttpResponse(content="Your application was not attributed yet.")
-            response['Content-Type'] = 'text/plain'
-    else:
-        response = HttpResponse(content="You do not have an application record.")
-        response['Content-Type'] = 'text/plain'
+    application = Application.objects.filter(created_by=request.user).first()
+    attribution = Attribution.objects.filter(student=application).first()
     
     context = {
         'page_title' : page_title,
         'attribution' : attribution,
+        'application' : application,
     }
 
     return render(

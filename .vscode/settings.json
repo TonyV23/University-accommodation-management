@@ -3,5 +3,12 @@
     "editor.defaultFormatter": "ms-python.python"
   },
   "python.formatting.provider": "none",
-  "cSpell.words": ["VISUALISER", "Yussuf"]
+  "cSpell.words": [
+    "DEMANDEUR",
+    "Félications",
+    "traité",
+    "traitée",
+    "VISUALISER",
+    "Yussuf"
+  ]
 }
