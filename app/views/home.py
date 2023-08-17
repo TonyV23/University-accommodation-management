@@ -41,13 +41,18 @@ def index_student(request):
     page_title = 'Accueil'
     template = 'app/home/index_student.html'
 
-    application = Application.objects.filter(created_by=request.user).first()
-    attribution = Attribution.objects.filter(student=application).first()
-    
+    applications = Application.objects.filter(created_by=request.user)
+
+    attribution_list = []
+    for application in applications:
+        attribution = Attribution.objects.filter(student=application).first()
+        if attribution:
+            attribution_list.append(attribution)
+
     context = {
-        'page_title' : page_title,
-        'attribution' : attribution,
-        'application' : application,
+        'page_title': page_title,
+        'applications': applications,
+        'attributions': attribution_list,
     }
 
     return render(
