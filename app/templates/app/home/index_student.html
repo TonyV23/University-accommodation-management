@@ -2,25 +2,44 @@
 
 {% block content %}
 <div class="content">
-    <!-- application_detail.html -->
-    {% if attribution %}
-        <h1>STATUT DE  LA DEMANDE</h1>
-        <p>Votre demande pour avoir un logement a été traité. <br>
-            Rendez-vous au bureau de gestion des logements pour plus d'informations 
-            <br><br>FELICITATIONS !</p><br>
-        <p><span class="fw-bold">ETUDIANT :</span>{{ application.student.last_name }} {{ application.student.last_name }}</p>
-        <p><span class="fw-bold">TYPE DE LOGEMENT: </span>{{ application.accommodation.designation }}</p>
-        <p><span class="fw-bold">NUMERO DE LA CARTE DE RESIDENCE: </span>{{ application.residence_card_number }}</p>
-        <p><span class="fw-bold">DATE DE DEMANDE: </span>{{ application.date_application }}</p>
-        <p><span class="fw-bold">CHAMBRE: </span>{{ attribution.bedroom.number }}</p>
-        <p><span class="fw-bold">METHODE DE PAIEMENT:</span> {{ attribution.payment_method }}</p>
-        <p><span class="fw-bold">MONTANT PAYE:</span> {{ attribution.amount_paid }}</p>
-        <p><span class="fw-bold">DATE D'ATTRIBUTION:</span> {{ attribution.date_attribution }}</p>
+
+    <h1>STATUT DE LA DEMANDE</h1>
+    {% if attributions %}
+    <p>Votre demande pour avoir un logement a été traité. <br>
+        Rendez-vous au bureau de gestion des logements pour plus d'informations
+        <br><br>FELICITATIONS !
+    </p><br>
+    {% for attribution in attributions %}
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Application ID</th>
+                <th>Type de logement</th>
+                <th>Date de demande</th>
+                <th>Etudiant</th>
+                <th>Chambre</th>
+                <th>Mode paiement</th>
+                <th>Montant payé</th>
+                <th>Date d'attribution</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ attribution.id }}</td>
+                <td>{{ attribution.student.accommodation.designation }}</td>
+                <td>{{ attribution.student.date_application }}</td>
+                <td>{{ attribution.student.student.last_name }} {{ attribution.student.student.first_name }}</td>
+                <td>{{ attribution.bedroom.number }}</td>
+                <td>{{ attribution.payment_method }}</td>
+                <td>{{ attribution.amount_paid }}</td>
+                <td>{{ attribution.date_attribution }}</td>
+            </tr>
+        </tbody>
+    </table>
+    {% endfor %}
     {% else %}
-
-        <h6 class="bold">VOTRE DEMANDE N'A PAS ENCORE ETE TRAITEE.</h6>
-    {% endif %}
-
+    <td>Votre demande n'a pas encore été traitée.</td>
+    {% endif%}
 
 
 </div>
