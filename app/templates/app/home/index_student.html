@@ -14,10 +14,12 @@
         <thead>
             <tr>
                 <th>Application ID</th>
+                <th>Etudiant</th>
                 <th>Type de logement</th>
                 <th>Date de demande</th>
-                <th>Etudiant</th>
-                <th>Chambre</th>
+                <th>Pavillon</th>
+                <th>Numero chambre</th>
+                <th>Campus</th>
                 <th>Mode paiement</th>
                 <th>Montant payé</th>
                 <th>Date d'attribution</th>
@@ -26,10 +28,12 @@
         <tbody>
             <tr>
                 <td>{{ attribution.id }}</td>
+                <td>{{ attribution.student.student.last_name }} {{ attribution.student.student.first_name }}</td>
                 <td>{{ attribution.student.accommodation.designation }}</td>
                 <td>{{ attribution.student.date_application }}</td>
-                <td>{{ attribution.student.student.last_name }} {{ attribution.student.student.first_name }}</td>
+                <td>{{ attribution.bedroom.location.designation }}</td>
                 <td>{{ attribution.bedroom.number }}</td>
+                <td>{{ attribution.student.student.campus }}</td>
                 <td>{{ attribution.payment_method }}</td>
                 <td>{{ attribution.amount_paid }}</td>
                 <td>{{ attribution.date_attribution }}</td>
