@@ -1,11 +1,18 @@
 <header id="header" class="header fixed-top d-flex align-items-center">
     {% load static %}
+    {% load user_tags %}
     <div class="d-flex align-items-center justify-content-between">
         <a href="{% url 'dashboard' %}" class="logo d-flex align-items-center">
             <img src="{% static 'app/img/logo.png' %}" alt="">
-            <span class="d-none d-lg-block"></span>
+            <span class="d-none d-lg-block">Gestion Logement</span>
         </a>
         <i class="bi bi-list toggle-sidebar-btn"></i>
+        {% if user.is_superuser %}
+        <h6 class="m-3 text-secondary">ESPACE ADMINISTRATEUR</h6>
+        {% endif %}
+        {% if user|user_belongs_to_group:'students' %}
+        <h6 class="m-3 text-secondary">ESPACE ETUDIANT</h6>
+        {% endif %}
     </div>
 
 
@@ -16,28 +23,13 @@
             <li class="nav-item dropdown pe-3">
                 {% load static %}
                 <a class="nav-link nav-profile d-flex align-items-center pe-0" href="#" data-bs-toggle="dropdown">
-                    <span class="d-none d-md-block dropdown-toggle ps-2"></span>
+                    <img src="{% static 'app/img/nav-pic.jpg' %}" alt="Profile" class="rounded-circle">
                 </a>
 
                 <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile">
                     <li class="dropdown-header">
-                        <h6>{{user.username}}</h6>
-                        <span>{{user.email}}</span>
+                        <h6>Identifiant du compte :{{user.id}}</h6>
                     </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
-                    <li>
-                        <a class="dropdown-item d-flex align-items-center" href="{% url 'add_user' %}">
-                            <i class="bi bi-person"></i>
-                            <span>Ajouter un compte étudiant</span>
-                        </a>
-                    </li>
-                    <li>
-                        <hr class="dropdown-divider">
-                    </li>
-
                     <li>
                         <hr class="dropdown-divider">
                     </li>
