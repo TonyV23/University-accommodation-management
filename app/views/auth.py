@@ -28,11 +28,10 @@ def index(request) :
         context = variable
     )
 
-@login_required(login_url ='login')
-@allowed_users(allowed_roles= ['admins'])
+@unauthenticated_user
 def add_user(request) :
     page_title = 'Nouveau compte'
-    template = 'app/settings/users/add.html'
+    template = 'app/settings/users/register.html'
     form = UserForm()
 
     variable = {
@@ -46,8 +45,7 @@ def add_user(request) :
         context = variable
     )
 
-@login_required(login_url ='login')
-@allowed_users(allowed_roles= ['admins'])
+@unauthenticated_user
 def store_user(request):
     if request.method == 'POST':
         form = UserForm(request.POST)
@@ -56,9 +54,9 @@ def store_user(request):
             username = form.cleaned_data.get('username')
             group = Group.objects.get(name = 'students')
             user.groups.add(group)    
-            messages.success(request, 'Le compte de '+username+' a été ajouté')
+            messages.success(request, 'Le compte de '+username+' a été créée')
         
-        return redirect('/accounts')
+        return redirect('/login')
 
 @unauthenticated_user
 def login_user(request) :
