@@ -19,13 +19,14 @@
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     {% endfor %}
+
     {% endif %}
     <div class="col-lg-12">
 
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">LISTE DES DEMANDES FAITES</h5>
-                <a href="{% url 'add_application_student' %}" class="btn btn-outline-primary m-3"> <i class="bi bi-cloud-plus"></i> FAIRE UNE DEMANDE</a>
+                <a href="{% url 'add_application_student' %}" class="btn btn-outline-primary m-3"> <i class="bi bi-cloud-plus"></i> FAIRE UNE NOUVELLE DEMANDE</a>
                 <table class="table datatable">
                     <thead>
                         <tr>
