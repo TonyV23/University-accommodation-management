@@ -4,7 +4,7 @@ from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
 
 from app.forms import ApplicationForm
-from app.models import Application
+from app.models import Application, Student
 from app.decorators import allowed_users
 
 
@@ -105,8 +105,21 @@ def store_application_student(request):
         form = ApplicationForm(request.POST)
         if form.is_valid():
             application = form.save(commit=False)
-            application.created_by = request.user  
-            application.save()
+            application.created_by = request.user
+
+            # check if the matricule is the same in student model and in application model
+            student_matricule = form.changed_data.get('matricule')
+            try:
+                student = Student.objects.get(matricule=student_matricule)
+                if student.matricule == application.matricule :
+                    application.save()
+                    messages.success(request, "Votre demande a été envoyé avec succès !")
+                else :
+                    messages.error(request, "Le matricule correspond pas")
+
+            except Student.DoesNotExist :
+                messages.error(request, "Etudiant introuvable")
+            
             messages.success(request,"Votre demande a été envoyé avec succès !")
         else :
             messages.error(request, form.errors)
