@@ -104,7 +104,9 @@ def store_application_student(request):
     if request.method == 'POST':
         form = ApplicationForm(request.POST)
         if form.is_valid():
-            form.save()
+            application = form.save(commit=False)
+            application.created_by = request.user  
+            application.save()
             messages.success(request,"Votre demande a été envoyé avec succès !")
         else :
             messages.error(request, form.errors)

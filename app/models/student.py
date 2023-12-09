@@ -1,4 +1,5 @@
 from django.db import models
+import random
 from app.models import Faculty, Department, Campus
 
 class Student(models.Model) :
@@ -15,6 +16,12 @@ class Student(models.Model) :
     inscription_number = models.PositiveIntegerField()
     inscription_date = models.DateField(auto_now_add=True)
     campus = models.ForeignKey(Campus, on_delete=models.CASCADE)
+    matricule = models.CharField(max_length=4, unique=True)
+
+    def save(self, *args, **kwargs):
+        # Generate a 4-digit random matricule
+        self.matricule = str(random.randint(1000, 9999))
+        super().save(*args, **kwargs)
     
     def __str__(self) -> str:
         return self.first_name+" - "+self.last_name
