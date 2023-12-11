@@ -106,25 +106,20 @@ def store_application_student(request):
         if form.is_valid():
             application = form.save(commit=False)
             application.created_by = request.user
-
-            # check if the matricule is the same in student model and in application model
-            student_matricule = form.changed_data.get('matricule')
+            student_matricule = form.cleaned_data.get('matricule')
             try:
                 student = Student.objects.get(matricule=student_matricule)
-                if student.matricule == application.matricule :
+                if student.matricule == application.matricule:
                     application.save()
-                    messages.success(request, "Votre demande a été envoyé avec succès !")
-                else :
-                    messages.error(request, "Le matricule correspond pas")
-
-            except Student.DoesNotExist :
-                messages.error(request, "Etudiant introuvable")
-            
-            messages.success(request,"Votre demande a été envoyé avec succès !")
-        else :
+                    messages.success(request, "Votre demande a été envoyée avec succès!")
+                else:
+                    messages.error(request, "Le matricule ne correspond pas.")
+            except Student.DoesNotExist:
+                messages.error(request, "Étudiant introuvable.")
+        else:
             messages.error(request, form.errors)
-        return redirect('/applicationStudent')
 
+        return redirect('/applicationStudent')
 
 @login_required(login_url ='login')
 @allowed_users(allowed_roles= ['admins', 'students'])

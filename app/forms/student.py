@@ -7,7 +7,7 @@ class StudentForm (ModelForm) :
 
     class Meta :
         model = Student
-        exclude =['matricule']
+        exclude =['matricule','']
         widgets = {
             "birth_date": forms.TextInput(attrs={'type': 'date'})
         }
