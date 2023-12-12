@@ -1,9 +1,16 @@
 {% extends 'app/layouts/default_student.html' %}
 
 {% block content %}
+<div class="row">
+<div class="col-md-4">
+    <h1>STATUT DE LA DEMANDE</h1>
+    <h5>{% if attributions.student.status %} {% else %} Demande en attente de validation par votre université{% endif %}</h5>
+</div>
+
+<div class="col-md-8"></div>
+</div>
 <div class="content">
 
-    <h1>STATUT DE LA DEMANDE</h1>
     {% if attributions %}
     <p>Votre demande pour avoir un logement a été traité. <br>
         Rendez-vous au bureau de gestion des logements pour plus d'informations
@@ -42,7 +49,7 @@
     </table>
     {% endfor %}
     {% else %}
-    <td>Votre demande n'a pas encore été traitée.</td>
+
     {% endif%}
 
 

@@ -7,7 +7,7 @@ class ApplicationForm (ModelForm) :
 
     class Meta :
         model = Application
-        exclude = ['created_by']
+        exclude = ['status','created_by']
         widgets = {
             "entry_date": forms.TextInput(attrs={'type': 'date'})
         }

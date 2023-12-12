@@ -38,7 +38,6 @@
                             <th scope="col">CAMPUS</th>
                             <th scope="col">DATE ENTREE</th>
                             <th scope="col">TYPE LOGEMENT</th>
-                            <th scope="col">N° CARTE RESIDENCE</th>
                             <th scope="col">DATE DEMANDE</th>
                             <th scope="col">STATUS</th>
                             <th scope="col">ACTIONS</th>
@@ -55,7 +54,6 @@
                             <td>{{ application.campus }}</td>
                             <td>{{ application.entry_date }}</td>
                             <td>{{ application.accommodation }}</td>
-                            <td>{{ application.residence_card_number }}</td>
                             <td>{{ application.date_application }}</td>
                             <td>{% if application.status %} <span class="badge bg-success">Approuvée</span>{% else %} <span class="badge bg-warning">En attente</span>{% endif %}</td>
                             <td>

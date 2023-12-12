@@ -10,7 +10,7 @@ from app.decorators import admin_only
 @admin_only
 def index(request) :
     
-    page_title = 'Tableau de Bord'
+    page_title = 'Accueil |Tableau de Bord'
     template = 'app/home/index.html'
 
     all_students = Student.objects.all().count()
