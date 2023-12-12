@@ -40,6 +40,7 @@
                             <th scope="col">TYPE LOGEMENT</th>
                             <th scope="col">N° CARTE RESIDENCE</th>
                             <th scope="col">DATE DEMANDE</th>
+                            <th scope="col">STATUS</th>
                             <th scope="col">ACTIONS</th>
                         </tr>
                     </thead>
@@ -56,6 +57,7 @@
                             <td>{{ application.accommodation }}</td>
                             <td>{{ application.residence_card_number }}</td>
                             <td>{{ application.date_application }}</td>
+                            <td>{% if application.status %} <span class="badge bg-success">Approuvée</span>{% else %} <span class="badge bg-warning">En attente</span>{% endif %}</td>
                             <td>
                                 <a href="{% url 'edit_application_student' application.id %}" class="hack-btn">MODIFIER</a>
                                 <a href="{% url 'delete_application_student' application.id %}" class="hack1-btn">SUPPRIMER</a>
