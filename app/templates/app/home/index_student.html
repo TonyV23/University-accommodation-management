@@ -2,56 +2,143 @@
 
 {% block content %}
 <div class="row">
-<div class="col-md-4">
-    <h1>STATUT DE LA DEMANDE</h1>
-    <h5>{% if attributions.student.status %} {% else %} Demande en attente de validation par votre université{% endif %}</h5>
-</div>
+    <div class="col-md-4">
+        <h1>STATUT DE LA DEMANDE</h1>
+        <h5>
+            {% if attributions.student.status %}
+            Votre demande a été accepté <span class="badge bg-success">Attribué</span>
+            {% else %}
+            En attente de validation par votre université <span class="badge bg-warning">En attente</span>
+            {% endif %}
+        </h5>
+    </div>
 
-<div class="col-md-8"></div>
-</div>
-<div class="content">
+    <div class="col-md-8">
+        <div class="content">
 
-    {% if attributions %}
-    <p>Votre demande pour avoir un logement a été traité. <br>
-        Rendez-vous au bureau de gestion des logements pour plus d'informations
-        <br><br>FELICITATIONS !
-    </p><br>
-    {% for attribution in attributions %}
-    <table class="table table-bordered table-striped">
-        <thead>
-            <tr>
-                <th>Application ID</th>
-                <th>Etudiant</th>
-                <th>Type de logement</th>
-                <th>Date de demande</th>
-                <th>Pavillon</th>
-                <th>Numero chambre</th>
-                <th>Campus</th>
-                <th>Mode paiement</th>
-                <th>Montant payé</th>
-                <th>Date d'attribution</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>{{ attribution.id }}</td>
-                <td>{{ attribution.student.student.last_name }} {{ attribution.student.student.first_name }}</td>
-                <td>{{ attribution.student.accommodation.designation }}</td>
-                <td>{{ attribution.student.date_application }}</td>
-                <td>{{ attribution.bedroom.location.designation }}</td>
-                <td>{{ attribution.bedroom.number }}</td>
-                <td>{{ attribution.student.student.campus }}</td>
-                <td>{{ attribution.payment_method }}</td>
-                <td>{{ attribution.amount_paid }}</td>
-                <td>{{ attribution.date_attribution }}</td>
-            </tr>
-        </tbody>
-    </table>
-    {% endfor %}
-    {% else %}
+            {% if attributions %}
+            <p>
+                Votre demande pour avoir un logement a été traité. <br>
+                Rendez-vous au bureau de gestion des logements pour plus d'informations.<br><br>
+                FELICITATIONS !
+            </p><br>
 
-    {% endif%}
+            {% for attribution in attributions %}
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Application ID</th>
+                        <th>Etudiant</th>
+                        <th>Type de logement</th>
+                        <th>Date de demande</th>
+                        <th>Pavillon</th>
+                        <th>Numero chambre</th>
+                        <th>Campus</th>
+                        <th>Mode paiement</th>
+                        <th>Montant payé</th>
+                        <th>Date d'attribution</th>
+                    </tr>
+                </thead>
 
+                <tbody>
+                    <tr>
+                        <td>{{ attribution.id }}</td>
+                        <td>
+                            {{ attribution.student.student.last_name }} {{ attribution.student.student.first_name }}
+                        </td>
+                        <td>{{ attribution.student.accommodation.designation }}</td>
+                        <td>{{ attribution.student.date_application }}</td>
+                        <td>{{ attribution.bedroom.location.designation }}</td>
+                        <td>{{ attribution.bedroom.number }}</td>
+                        <td>{{ attribution.student.student.campus }}</td>
+                        <td>{{ attribution.payment_method }}</td>
+                        <td>{{ attribution.amount_paid }}</td>
+                        <td>{{ attribution.date_attribution }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            {% endfor %}
+            {% else %}
+            <div class="card">
+                <div class="card-body pt-3">
+                    <!-- Bordered Tabs -->
+                    <ul class="nav nav-tabs nav-tabs-bordered">
 
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="tab"
+                                data-bs-target="#profile-overview">Information personnelle</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Ma demande</button>
+                        </li>
+
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="tab"
+                                data-bs-target="#profile-settings">Espace campus</button>
+                        </li>
+
+                    </ul>
+                    <div class="tab-content pt-2">
+
+                        <div class="tab-pane fade show active profile-overview" id="profile-overview">
+                        
+                            <div class="row m-3">
+                                <div class="col-lg-3 col-md-4 label"><strong>NOM</strong></div>
+                                <div class="col-lg-9 col-md-8">{{user.last_name}}</div>
+                            </div>
+                            <div class="row m-3">
+                                <div class="col-lg-3 col-md-4 label"><strong>PRENOM</strong></div>
+                                <div class="col-lg-9 col-md-8">{{user.first_name}}</div>
+                            </div>
+                            <div class="row m-3">
+                                <div class="col-lg-3 col-md-4 label"><strong>EMAIL</strong></div>
+                                <div class="col-lg-9 col-md-8">{{user.email}}</div>
+                            </div>
+                            <div class="row m-3">
+                                <div class="col-lg-3 col-md-4 label"><strong>NOM UTILISATEUR</strong></div>
+                                <div class="col-lg-9 col-md-8">{{user.username}}</div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade profile-edit pt-2" id="profile-edit">
+                            <div class="row m-3">
+                                <div class="col-lg-3 col-md-4 label"><strong>LOGEMENT</strong></div>
+                                <div class="col-lg-9 col-md-8">{{applications.accommodation.designation}}</div>
+                            </div>
+
+                            <div class="row m-3">
+                                <div class="col-lg-3 col-md-4 label"><strong>PAVILLON</strong></div>
+                                <div class="col-lg-9 col-md-8">{{applications.location.designation}}</div>
+                            </div>
+                            
+                            <div class="row m-3">
+                                <div class="col-lg-3 col-md-4 label"><strong>DATE DEMANDE</strong></div>
+                                <div class="col-lg-9 col-md-8">{{applications.date_application}}</div>
+                            </div>
+                            <div class="row m-3">
+                                <div class="col-lg-3 col-md-4 label"><strong>STATUT</strong></div>
+                                <div class="col-lg-9 col-md-8">{{applications.status}}</div>
+                            </div>
+
+                        </div>
+
+                        <div class="tab-pane fade pt-3" id="profile-settings">
+
+                        </div>
+
+                        <div class="tab-pane fade pt-3" id="profile-change-password">
+                          
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+            {% endif %}
+
+        </div>
+    </div>
 </div>
 {% endblock %}
