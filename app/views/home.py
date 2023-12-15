@@ -15,7 +15,7 @@ def index(request) :
 
     all_students = Student.objects.all().count()
     all_bedrooms = BedRoom.objects.all().count()
-    all_applications = Application.objects.all().count()
+    all_applications = Application.objects.filter(status=False).count()
     all_attributions = Attribution.objects.all().count()
 
     true_bedrooms = BedRoom.objects.filter(status=True).count()
