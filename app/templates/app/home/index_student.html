@@ -4,13 +4,17 @@
 <div class="row">
     <div class="col-md-4">
         <h1>STATUT DE LA DEMANDE</h1>
-        <h5>
-            {% if attributions.student.status %}
-            Votre demande a été accepté <span class="badge bg-success">Attribué</span>
+        <h4>
+            {% if applications.status == 1 %}
+            <span class="badge bg-success">Demande acceptée</span>
+            {% elif applications.status == 0 %}
+            <span class="badge bg-warning">Demande en attente</span>
+            {% elif applications.status == 2 %}
+            <span class="badge bg-danger">Demande Rejectée</span>
             {% else %}
-            En attente de validation par votre université <span class="badge bg-warning">En attente</span>
+            <span class="badge bg-primary">Pas de demande en cours</span>
             {% endif %}
-        </h5>
+        </h4>
     </div>
 
     <div class="col-md-8">
@@ -70,27 +74,15 @@
                         </li>
 
                         <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Ma demande</button>
-                        </li>
-
-                        <li class="nav-item">
-                            <button class="nav-link" data-bs-toggle="tab"
-                                data-bs-target="#profile-settings">Espace campus</button>
+                            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#profile-edit">Ma
+                                demande</button>
                         </li>
 
                     </ul>
                     <div class="tab-content pt-2">
 
                         <div class="tab-pane fade show active profile-overview" id="profile-overview">
-                        
-                            <div class="row m-3">
-                                <div class="col-lg-3 col-md-4 label"><strong>NOM</strong></div>
-                                <div class="col-lg-9 col-md-8">{{user.last_name}}</div>
-                            </div>
-                            <div class="row m-3">
-                                <div class="col-lg-3 col-md-4 label"><strong>PRENOM</strong></div>
-                                <div class="col-lg-9 col-md-8">{{user.first_name}}</div>
-                            </div>
+
                             <div class="row m-3">
                                 <div class="col-lg-3 col-md-4 label"><strong>EMAIL</strong></div>
                                 <div class="col-lg-9 col-md-8">{{user.email}}</div>
@@ -102,6 +94,7 @@
 
                         </div>
 
+                        {% if attributions.student.status == "accepted" %}
                         <div class="tab-pane fade profile-edit pt-2" id="profile-edit">
                             <div class="row m-3">
                                 <div class="col-lg-3 col-md-4 label"><strong>LOGEMENT</strong></div>
@@ -112,28 +105,31 @@
                                 <div class="col-lg-3 col-md-4 label"><strong>PAVILLON</strong></div>
                                 <div class="col-lg-9 col-md-8">{{applications.location.designation}}</div>
                             </div>
-                            
+
                             <div class="row m-3">
                                 <div class="col-lg-3 col-md-4 label"><strong>DATE DEMANDE</strong></div>
                                 <div class="col-lg-9 col-md-8">{{applications.date_application}}</div>
                             </div>
+
+                        </div>
+                        {% elif attributions.student.status == "pending" %}
+                        <div class="tab-pane fade profile-edit pt-2" id="profile-edit">
+                            Votre demande est entrain d'être revu par votre unviersité
+                        </div>
+                        {% elif attributions.student.status == "rejected" %}
+                        <div class="tab-pane fade profile-edit pt-2" id="profile-edit">
+                            Votre demande a été rejecté par votre unviersité
+                        </div>
+                        {% elif attributions.student.status == "not_applied" %}
+                        <div class="tab-pane fade profile-edit pt-2" id="profile-edit">
                             <div class="row m-3">
-                                <div class="col-lg-3 col-md-4 label"><strong>STATUT</strong></div>
-                                <div class="col-lg-9 col-md-8">{{applications.status}}</div>
+                                <div class="col-lg-3 col-md-4 label"><strong>PAVILLON</strong></div>
+                                <div class="col-lg-9 col-md-8">{{applications.location.designation}}</div>
+                                Aucune demande soumis via ce compte étudiant
                             </div>
-
                         </div>
-
-                        <div class="tab-pane fade pt-3" id="profile-settings">
-
-                        </div>
-
-                        <div class="tab-pane fade pt-3" id="profile-change-password">
-                          
-                        </div>
-
+                        {% endif %}
                     </div>
-
                 </div>
             </div>
             {% endif %}
