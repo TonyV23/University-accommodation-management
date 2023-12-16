@@ -110,7 +110,7 @@ def store_application_student(request):
             try:
                 student = Student.objects.get(matricule=student_matricule)
                 if student.matricule == application.matricule:
-                    application.status = "pending"
+                    application.status = 2
                     application.save()
                     messages.success(request, "Votre demande a été envoyée avec succès!")
                 else:
