@@ -5,12 +5,16 @@
     <div class="col-md-4">
         <h1>STATUT DE LA DEMANDE</h1>
         <h4>
-            {% if applications.status == 1 %}
+            {% if application_list %}
+            {% for application in application_list %}
+            {% if application.status == 1 %}
             <span class="badge bg-success">Demande acceptée</span>
-            {% elif applications.status == 0 %}
+            {% elif application.status == 0 %}
             <span class="badge bg-warning">Demande en attente</span>
-            {% elif applications.status == 2 %}
+            {% elif application.status == 3 %}
             <span class="badge bg-danger">Demande Rejectée</span>
+            {% endif %}
+            {% endfor %}
             {% else %}
             <span class="badge bg-primary">Pas de demande en cours</span>
             {% endif %}
@@ -98,17 +102,17 @@
                         <div class="tab-pane fade profile-edit pt-2" id="profile-edit">
                             <div class="row m-3">
                                 <div class="col-lg-3 col-md-4 label"><strong>LOGEMENT</strong></div>
-                                <div class="col-lg-9 col-md-8">{{applications.accommodation.designation}}</div>
+                                <div class="col-lg-9 col-md-8">{{application_list.accommodation.designation}}</div>
                             </div>
 
                             <div class="row m-3">
                                 <div class="col-lg-3 col-md-4 label"><strong>PAVILLON</strong></div>
-                                <div class="col-lg-9 col-md-8">{{applications.location.designation}}</div>
+                                <div class="col-lg-9 col-md-8">{{application_list.location.designation}}</div>
                             </div>
 
                             <div class="row m-3">
                                 <div class="col-lg-3 col-md-4 label"><strong>DATE DEMANDE</strong></div>
-                                <div class="col-lg-9 col-md-8">{{applications.date_application}}</div>
+                                <div class="col-lg-9 col-md-8">{{application_list.date_application}}</div>
                             </div>
 
                         </div>
@@ -124,7 +128,7 @@
                         <div class="tab-pane fade profile-edit pt-2" id="profile-edit">
                             <div class="row m-3">
                                 <div class="col-lg-3 col-md-4 label"><strong>PAVILLON</strong></div>
-                                <div class="col-lg-9 col-md-8">{{applications.location.designation}}</div>
+                                <div class="col-lg-9 col-md-8">{{application_list.location.designation}}</div>
                                 Aucune demande soumis via ce compte étudiant
                             </div>
                         </div>

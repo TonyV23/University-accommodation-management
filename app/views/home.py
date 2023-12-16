@@ -42,6 +42,7 @@ def index_student(request):
     template = 'app/home/index_student.html'
 
     applications = Application.objects.filter(created_by=request.user)
+    application_list = Application.objects.filter(created_by=request.user)
 
     attribution_list = []
     for application in applications:
@@ -52,6 +53,7 @@ def index_student(request):
     context = {
         'page_title': page_title,
         'applications': applications,
+        'application_list': application_list,
         'attributions': attribution_list,
     }
 

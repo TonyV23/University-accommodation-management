@@ -8,7 +8,6 @@ class Application(models.Model) :
         (1, "Accepter"),
         (0, "Rejeter"),
         (2, "En attente"),
-        (3, "Pas encore appliqué"),
     )
     
     matricule = models.CharField(max_length=20)
@@ -24,7 +23,7 @@ class Application(models.Model) :
     residence_card_number = models.CharField(max_length=20)
     matricule_maquisard = models.CharField(max_length=20, help_text="Si vous n'avez pas de maquisard, ce numéro n'est pas obligatoire. Il est obligatoire si vous en avez.", null=True)
     residence_card_maquisard = models.CharField(max_length=20, help_text="N° de la carte de résidence du Maquisard", null=True)
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=3)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default=2)
     date_application = models.DateField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
