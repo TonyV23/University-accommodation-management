@@ -3,7 +3,14 @@ from app.models import Student, Accommodation, Faculty, Department, Campus, Loca
 from django.contrib.auth.models import User
 
 class Application(models.Model) :
-       
+    
+    STATUS_CHOICES = (
+        ("accepted", "Accepter"),
+        ("rejected", "Rejeter"),
+        ("pending", "En attente"),
+        ("not_applied", "Pas encore appliqué"),
+    )
+    
     matricule = models.CharField(max_length=20)
     student = models.OneToOneField(Student, on_delete=models.CASCADE)
     faculty = models.ForeignKey(Faculty, on_delete=models.CASCADE)
@@ -17,7 +24,7 @@ class Application(models.Model) :
     residence_card_number = models.CharField(max_length=20)
     matricule_maquisard = models.CharField(max_length=20, help_text="Si vous n'avez pas de maquisard, ce numéro n'est pas obligatoire. Il est obligatoire si vous en avez.", null=True)
     residence_card_maquisard = models.CharField(max_length=20, help_text="N° de la carte de résidence du Maquisard", null=True)
-    status = models.BooleanField(default=False)
+    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="not_applied")
     date_application = models.DateField(auto_now_add=True)
     created_by = models.ForeignKey(User, on_delete=models.CASCADE, null=True)
 
