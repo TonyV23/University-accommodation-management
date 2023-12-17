@@ -17,7 +17,7 @@
         <i class="bi bi-check-circle me-1"></i>
         {{ message }}
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-      </div>
+    </div>
     {% endfor %}
     {% endif %}
     <div class="col-lg-12">
@@ -31,10 +31,14 @@
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">ETUDIANT (E)</th>
+                            <th scope="col">FACULTE</th>
+                            <th scope="col">DEPARTEMENT</th>
+                            <th scope="col">MATRICULE</th>
+                            <th scope="col">CAMPUS</th>
+                            <th scope="col">DATE ENTREE</th>
                             <th scope="col">TYPE LOGEMENT</th>
-                            <th scope="col">NUMERO CARTE RESIDENCE</th>
-                            <th scope="col">LETTRE DEMANDE</th>
                             <th scope="col">DATE DEMANDE</th>
+                            <th scope="col">STATUS</th>
                             <th scope="col">ACTIONS</th>
                         </tr>
                     </thead>
@@ -43,18 +47,29 @@
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ application.student }}</td>
+                            <td>{{ application.faculty }}</td>
+                            <td>{{ application.departement }}</td>
+                            <td>{{ application.matricule }}</td>
+                            <td>{{ application.campus }}</td>
+                            <td>{{ application.entry_date }}</td>
                             <td>{{ application.accommodation }}</td>
-                            <td>{{ application.residence_card_number }}</td>
-                            <td>{{ application.application_letter }}</td>
                             <td>{{ application.date_application }}</td>
                             <td>
+                                {% if application.status == 1 %}
+                                <span class="badge bg-success">Approuvée</span>
+                                {% elif application.status == 0 %}
+                                <span class="badge bg-danger">Rejectée</span>
+                                {% else %}
+                                <span class="badge bg-warning">En attente</span>
+                                    {% endif %}
+                            </td>
+                            <td>
                                 <a href="{% url 'edit_application' application.id %}" class="hack-btn">VISUALISER</a>
-                                <a href="{% url 'delete_application' application.id %}" class="hack1-btn">SUPPRIMER</a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
-                    
+
                 </table>
             </div>
         </div>
