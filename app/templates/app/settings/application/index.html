@@ -48,7 +48,7 @@
                             <td>
                                 <button type="button" class="hack-btn" data-bs-toggle="modal"
                                     data-bs-target="#detailsModal{{ forloop.counter }}">DETAILS</button>
-                                <a href="{% url 'edit_application' application.id %}" class="hack-btn">DECISION</a>
+                                <a href="{% url 'edit_application_status' application.id %}" class="hack-btn">PRENDRE DECISION</a>
                             </td>
                         </tr>
                         {% endfor %}
@@ -80,7 +80,6 @@
                                         <p><strong>CHAMBRE:</strong> {{ application.bedroom.number }}</p>
                                         <p><strong>Catégorie:</strong> :{{ application.bedroom.category }}</p>
                                         <p><strong>PAVILLON:</strong> {{ application.location.designation }}</p>
-                                        <p><strong>TYPE LOGEMENT:</strong> {{ application.accommodation }}</p>
                                         <p><strong>DATE DEMANDE:</strong> {{ application.date_application }}</p>
                                         <p>
                                             <strong>STATUS:</strong>

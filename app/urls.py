@@ -30,6 +30,8 @@ urlpatterns = [
     path('applicationStudent/add', application.add_application_student, name ='add_application_student'),
     path('applicationStudent/store', application.store_application_student, name ='store_application_student'),
     path('applicationStudent/edit/<int:id>', application.edit_application_student, name ='edit_application_student'),
+    path('applicationStudent/edit-status/<int:id>', application.edit_application_status, name='edit_application_status'),
+    path('applicationStudent/update-status/<int:id>', application.update_application_status, name='update_application_status'),
     path('applicationStudent/update/<int:id>', application.update_application_student, name ='update_application_student'),
     path('applicationStudent/delete/<int:id>', application.delete_application_student, name ='delete_application_student'),
 

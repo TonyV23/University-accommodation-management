@@ -11,3 +11,8 @@ class ApplicationForm (ModelForm) :
         widgets = {
             "entry_date": forms.TextInput(attrs={'type': 'date'})
         }
+
+class ApplicationStatusForm (forms.ModelForm):
+    class Meta:
+        model = Application
+        fields = ['status']

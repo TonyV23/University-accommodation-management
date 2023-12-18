@@ -1,0 +1,21 @@
+{% extends 'app/layouts/default.html' %}
+
+{% block content %}
+
+{% load crispy_forms_tags %}
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title">{{ page_title }}</h5>
+        <form class="row g-3" action="{% url 'update_application_status' form.instance.pk %}" method="post">
+            {% csrf_token %}
+            {{ form|crispy }}
+
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Mettre à jour</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

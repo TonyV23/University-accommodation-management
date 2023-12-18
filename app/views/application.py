@@ -3,7 +3,7 @@ from django.contrib import messages
 from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
 
-from app.forms import ApplicationForm
+from app.forms import ApplicationForm, ApplicationStatusForm
 from app.models import Application, Student
 from app.decorators import allowed_users
 
@@ -213,3 +213,36 @@ def delete_application_student(request, id) :
     application.delete()
     messages.success(request,"La demande a été supprimé avec succès !")
     return redirect('/applicationStudent')
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admins', 'students'])
+def edit_application_status(request, id):
+    assert isinstance(request, HttpRequest)
+    page_title = "Modifier le statut de la demande"
+    if request.method == 'GET':
+        application = Application.objects.get(pk=id)
+        form = ApplicationStatusForm(instance=application)
+        template = 'app/settings/application/edit_status.html'
+        context = {
+            'page_title': page_title,
+            'form': form
+        }
+        return render(request, template_name=template, context=context)
+
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['admins', 'students'])
+def update_application_status(request, id):
+    if request.method == 'POST':
+        if id == 0:
+            form = ApplicationForm(request.POST)
+        else:
+            application = Application.objects.get(pk=id)
+            form = ApplicationStatusForm(request.POST, instance=application)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Le statut de la demande a été mis à jour avec succès.')
+            return redirect('/application')
+        else:
+            print(form.errors)
+            messages.error(request, 'Une erreur s\'est produite lors de la mise à jour du statut de la demande.')
+            return redirect('/application')
