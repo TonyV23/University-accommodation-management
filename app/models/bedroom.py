@@ -3,7 +3,7 @@ from app.models import Location
 
 class BedRoom(models.Model) :
     bedRoomType = (
-            ('M','Male'),('F', 'female')
+            ('HOMME','Male'),('Femme', 'female')
         )
     
     number = models.CharField(max_length=20, unique=True)
