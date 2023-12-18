@@ -34,11 +34,6 @@
                             <th scope="col">FACULTE</th>
                             <th scope="col">DEPARTEMENT</th>
                             <th scope="col">MATRICULE</th>
-                            <th scope="col">CAMPUS</th>
-                            <th scope="col">DATE ENTREE</th>
-                            <th scope="col">TYPE LOGEMENT</th>
-                            <th scope="col">DATE DEMANDE</th>
-                            <th scope="col">STATUS</th>
                             <th scope="col">ACTIONS</th>
                         </tr>
                     </thead>
@@ -50,27 +45,64 @@
                             <td>{{ application.faculty }}</td>
                             <td>{{ application.departement }}</td>
                             <td>{{ application.matricule }}</td>
-                            <td>{{ application.campus }}</td>
-                            <td>{{ application.entry_date }}</td>
-                            <td>{{ application.accommodation }}</td>
-                            <td>{{ application.date_application }}</td>
                             <td>
-                                {% if application.status == 1 %}
-                                <span class="badge bg-success">Approuvée</span>
-                                {% elif application.status == 0 %}
-                                <span class="badge bg-danger">Rejectée</span>
-                                {% else %}
-                                <span class="badge bg-warning">En attente</span>
-                                    {% endif %}
-                            </td>
-                            <td>
-                                <a href="{% url 'edit_application' application.id %}" class="hack-btn">VISUALISER</a>
+                                <button type="button" class="hack-btn" data-bs-toggle="modal"
+                                    data-bs-target="#detailsModal{{ forloop.counter }}">DETAILS</button>
+                                <a href="{% url 'edit_application' application.id %}" class="hack-btn">DECISION</a>
                             </td>
                         </tr>
                         {% endfor %}
                     </tbody>
 
                 </table>
+                {% for application in application_list %}
+                <!-- Modal for application details -->
+                <div class="modal fade" id="detailsModal{{ forloop.counter }}" tabindex="-1">
+                    <div class="modal-dialog modal-dialog-centered">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title">Détails de la demande</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <p><strong>ETUDIANT.E:</strong> {{ application.student }}</p>
+                                        <p><strong>FACULTE:</strong> {{ application.faculty }}</p>
+                                        <p><strong>DEPARTEMENT:</strong> {{ application.departement }}</p>
+                                        <p><strong>MATRICULE:</strong> {{ application.matricule }}</p>
+                                        <p><strong>CAMPUS:</strong> {{ application.campus }}</p>
+                                        <p><strong>DATE ENTREE:</strong> {{ application.entry_date }}</p>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <p><strong>TYPE LOGEMENT:</strong> {{ application.accommodation }}</p>
+                                        <p><strong>CHAMBRE:</strong> {{ application.bedroom.number }}</p>
+                                        <p><strong>Catégorie:</strong> :{{ application.bedroom.category }}</p>
+                                        <p><strong>PAVILLON:</strong> {{ application.location.designation }}</p>
+                                        <p><strong>TYPE LOGEMENT:</strong> {{ application.accommodation }}</p>
+                                        <p><strong>DATE DEMANDE:</strong> {{ application.date_application }}</p>
+                                        <p>
+                                            <strong>STATUS:</strong>
+                                            {% if application.status == 1 %}
+                                            <span class="badge bg-success">Approuvée</span>
+                                            {% elif application.status == 0 %}
+                                            <span class="badge bg-danger">Rejectée</span>
+                                            {% else %}
+                                            <span class="badge bg-warning">En attente</span>
+                                            {% endif %}
+                                        </p>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
             </div>
         </div>
 
