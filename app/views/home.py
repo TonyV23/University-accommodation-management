@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 
 from app.models import Student, BedRoom, Application, Attribution
-from app.decorators import admin_only
+from app.decorators import admin_only, allowed_users
 
 
 @login_required(login_url ='login')
@@ -37,6 +37,8 @@ def index(request) :
         context = context
     )
 
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['students'])
 def index_student(request):
     page_title = 'Accueil'
     template = 'app/home/index_student.html'

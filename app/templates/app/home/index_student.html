@@ -10,9 +10,9 @@
             {% if application.status == 1 %}
             <span class="badge bg-success">Demande acceptée</span>
             {% elif application.status == 0 %}
-            <span class="badge bg-warning">Demande en attente</span>
-            {% elif application.status == 3 %}
             <span class="badge bg-danger">Demande Rejectée</span>
+            {% elif application.status == 2 %}
+            <span class="badge bg-danger">Demande en attente</span>
             {% endif %}
             {% endfor %}
             {% else %}
