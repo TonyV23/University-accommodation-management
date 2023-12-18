@@ -15,8 +15,10 @@ def index(request) :
 
     all_students = Student.objects.all().count()
     all_bedrooms = BedRoom.objects.all().count()
-    all_applications = Application.objects.filter(status=2).count()
-    all_attributions = Application.objects.filter(status=1).count()
+    all_applications = Application.objects.all().count()
+    accepted_applications = Application.objects.filter(status=1).count()
+    rejected_applications = Application.objects.filter(status=2).count()
+    pending_applications = Application.objects.filter(status=0).count()
 
     true_bedrooms = BedRoom.objects.filter(status=True).count()
     false_bedrooms = BedRoom.objects.filter(status=False).count()
@@ -26,7 +28,9 @@ def index(request) :
             'all_students' : all_students,
             'all_bedrooms' : all_bedrooms,
             'all_applications' : all_applications,
-            'all_attributions' : all_attributions,
+            'pending_applications' : pending_applications,
+            'accepted_applications' : accepted_applications,
+            'rejected_applications' : rejected_applications,
             'true_bedrooms' : true_bedrooms,
             'false_bedrooms' : false_bedrooms
         }
