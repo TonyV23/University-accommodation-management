@@ -4,14 +4,14 @@ from django.http import HttpRequest
 from django.contrib.auth.decorators import login_required
 
 from app.forms import AttributionForm
-from app.models import Attribution, Student, BedRoom
+from app.models import Application, Student, BedRoom
 from app.decorators import allowed_users
 
 @login_required(login_url ='login')
 @allowed_users(allowed_roles= ['admins'])
 def index(request):
     page_title = 'Liste des attributions des chambres'
-    attribution_list = Attribution.objects.all()
+    attribution_list = Application.objects.filter(status=1)
     template = 'app/settings/attribution/index.html'
     context = {
         'page_title' : page_title,

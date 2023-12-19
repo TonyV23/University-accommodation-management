@@ -64,11 +64,13 @@
                                 <span class="badge bg-warning">En attente</span>
                                 {% endif %}
                             </td>
-                            {% if application.status == 0 %}
+                            {% if application.status == 2 or application.status == 0 %}
                             <td>
                                 <a href="{% url 'edit_application_student' application.id %}" class="hack-btn">MODIFIER</a>
                                 <a href="{% url 'delete_application_student' application.id %}" class="hack1-btn">SUPPRIMER</a>
                             </td>
+                            {% else %}
+                            <td>Aucune action</td>
                             {% endif %}
                         </tr>
                         {% endfor %}

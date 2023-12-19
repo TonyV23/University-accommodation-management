@@ -25,17 +25,19 @@
         <div class="card">
             <div class="card-body">
                 <h5 class="card-title">LES DES ATTRIBUTIONS</h5>
-                <a href="{% url 'add_attribution' %}" class="hack2-btn">FAIRE UNE ATTRIBUTION</a>
+                <!-- <a href="{% url 'add_attribution' %}" class="hack2-btn">FAIRE UNE ATTRIBUTION</a> -->
                 <table class="table datatable">
                     <thead>
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">ETUDIANT (E)</th>
+                            <th scope="col">MATRICULE</th>
+                            <th scope="col">CAMPUS</th>
                             <th scope="col">CHAMBRE</th>
-                            <th scope="col">MOYEN DE PAIEMENT</th>
-                            <th scope="col">MONTANT PAYE</th>
-                            <th scope="col">DATE ATTRIBUTION</th>
-                            <th scope="col">ACTIONS</th>
+                            <th scope="col">CATEGORIE</th>
+                            <th scope="col">LOCALISATION</th>
+                            <th scope="col">STATUS</th>
+                            <!-- <th scope="col">ACTIONS</th> -->
                         </tr>
                     </thead>
                     <tbody>
@@ -43,14 +45,24 @@
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
                             <td>{{ attribution.student }}</td>
-                            <td>{{ attribution.bedroom }}</td>
-                            <td>{{ attribution.payment_method }}</td>
-                            <td>{{ attribution.amount_paid }}</td>
-                            <td>{{ attribution.date_attribution }}</td>
+                            <td>{{ attribution.matricule }}</td>
+                            <td>{{ attribution.campus }}</td>
+                            <td>{{ attribution.bedroom.number }}</td>
+                            <td>{{ attribution.bedroom.category }}</td>
+                            <td>{{ attribution.location }}</td>
                             <td>
+                                {% if attribution.status == 1 %} 
+                                <span class="badge bg-success">Approuvée</span>
+                                {% elif attribution.status == 0 %} 
+                                <span class="badge bg-danger">Rejectée</span>
+                                {% else %} 
+                                <span class="badge bg-warning">En attente</span>
+                                {% endif %}
+                            </td>
+                            <!-- <td>
                                 <a href="{% url 'edit_attribution' attribution.id %}" class="hack-btn">MODIFIER</a>
                                 <a href="{% url 'delete_attribution' attribution.id %}" class="hack1-btn">SUPPRIMER</a>
-                            </td>
+                            </td> -->
                         </tr>
                         {% endfor %}
                     </tbody>

@@ -13,7 +13,7 @@ from app.decorators import allowed_users
 def index(request) :
     page_title = 'Liste des demandes'
     template = 'app/settings/application/index.html'
-    application_list = Application.objects.all()
+    application_list = Application.objects.filter(status=2)
     context = {
             'page_title' : page_title,
             'application_list':application_list
