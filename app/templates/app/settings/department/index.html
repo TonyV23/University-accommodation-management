@@ -39,7 +39,7 @@
                         {% for department in departments_list %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ department.faculty_name }}</td>
+                            <td>{{ department.nom_de_la_faculte }}</td>
                             <td>{{ department.designation }}</td>
                             <td>
                                 <a href="{% url 'edit_department' department.id %}" class="hack-btn">MODIFIER</a>

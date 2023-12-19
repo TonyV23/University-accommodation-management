@@ -6,18 +6,18 @@ class BedRoom(models.Model) :
             ('HOMME','Male'),('Femme', 'female')
         )
     
-    number = models.CharField(max_length=20, unique=True)
-    category = models.CharField(choices=bedRoomType, max_length=10)
+    numero = models.CharField(max_length=20, unique=True)
+    categorie = models.CharField(choices=bedRoomType, max_length=10)
     status =  models.BooleanField(default=False)
-    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    localisation = models.ForeignKey(Location, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
-        return self.number
+        return self.numero
     
     class Meta :
          constraints = [
             models.UniqueConstraint(
-                fields = ['number', 'category', 'status', 'location'],
+                fields = ['numero', 'categorie', 'status', 'localisation'],
                 name = 'unique_bedroom'
             )
         ]

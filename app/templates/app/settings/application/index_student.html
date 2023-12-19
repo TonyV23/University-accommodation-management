@@ -47,14 +47,14 @@
                         {% for application in application_list %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ application.student }}</td>
-                            <td>{{ application.faculty }}</td>
+                            <td>{{ application.etudiant }}</td>
+                            <td>{{ application.faculte }}</td>
                             <td>{{ application.departement }}</td>
                             <td>{{ application.matricule }}</td>
                             <td>{{ application.campus }}</td>
-                            <td>{{ application.entry_date }}</td>
-                            <td>{{ application.accommodation }}</td>
-                            <td>{{ application.date_application }}</td>
+                            <td>{{ application.date_entree }}</td>
+                            <td>{{ application.logement }}</td>
+                            <td>{{ application.date_de_demande }}</td>
                             <td>
                                 {% if application.status == 1 %} 
                                 <span class="badge bg-success">Approuvée</span>

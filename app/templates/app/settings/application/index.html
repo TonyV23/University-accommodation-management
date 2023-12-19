@@ -24,7 +24,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">LES DEMANDES</h5>
+                <h5 class="card-title">LISTE DES DEMANDES FAITES</h5>
                 <!-- <a href="{% url 'add_application' %}" class="hack2-btn">FAIRE UNE DEMANDE</a> -->
                 <table class="table datatable">
                     <thead>
@@ -41,8 +41,8 @@
                         {% for application in application_list %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ application.student }}</td>
-                            <td>{{ application.faculty }}</td>
+                            <td>{{ application.etudiant }}</td>
+                            <td>{{ application.faculte }}</td>
                             <td>{{ application.departement }}</td>
                             <td>{{ application.matricule }}</td>
                             <td>
@@ -68,19 +68,19 @@
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <p><strong>ETUDIANT.E:</strong> {{ application.student }}</p>
-                                        <p><strong>FACULTE:</strong> {{ application.faculty }}</p>
+                                        <p><strong>ETUDIANT.E:</strong> {{ application.etudiant }}</p>
+                                        <p><strong>FACULTE:</strong> {{ application.faculte }}</p>
                                         <p><strong>DEPARTEMENT:</strong> {{ application.departement }}</p>
                                         <p><strong>MATRICULE:</strong> {{ application.matricule }}</p>
                                         <p><strong>CAMPUS:</strong> {{ application.campus }}</p>
-                                        <p><strong>DATE ENTREE:</strong> {{ application.entry_date }}</p>
+                                        <p><strong>DATE ENTREE:</strong> {{ application.date_entree }}</p>
                                     </div>
                                     <div class="col-md-6">
-                                        <p><strong>TYPE LOGEMENT:</strong> {{ application.accommodation }}</p>
-                                        <p><strong>CHAMBRE:</strong> {{ application.bedroom.number }}</p>
-                                        <p><strong>Catégorie:</strong> :{{ application.bedroom.category }}</p>
-                                        <p><strong>PAVILLON:</strong> {{ application.location.designation }}</p>
-                                        <p><strong>DATE DEMANDE:</strong> {{ application.date_application }}</p>
+                                        <p><strong>TYPE LOGEMENT:</strong> {{ application.logement }}</p>
+                                        <p><strong>CHAMBRE:</strong> {{ application.chambre.numero }}</p>
+                                        <p><strong>Catégorie:</strong> :{{ application.chambre.categorie }}</p>
+                                        <p><strong>PAVILLON:</strong> {{ application.localisation.designation }}</p>
+                                        <p><strong>DATE DEMANDE:</strong> {{ application.date_de_demande }}</p>
                                         <p>
                                             <strong>STATUS:</strong>
                                             {% if application.status == 1 %}

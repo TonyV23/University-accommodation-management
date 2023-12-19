@@ -24,7 +24,7 @@
 
         <div class="card">
             <div class="card-body">
-                <h5 class="card-title">LES DES ATTRIBUTIONS</h5>
+                <h5 class="card-title">LISTE DES ATTRIBUTIONS DES DEMANDES</h5>
                 <!-- <a href="{% url 'add_attribution' %}" class="hack2-btn">FAIRE UNE ATTRIBUTION</a> -->
                 <table class="table datatable">
                     <thead>
@@ -44,12 +44,12 @@
                         {% for attribution in attribution_list %}
                         <tr>
                             <th scope="row">{{ forloop.counter }}</th>
-                            <td>{{ attribution.student }}</td>
+                            <td>{{ attribution.etudiant }}</td>
                             <td>{{ attribution.matricule }}</td>
                             <td>{{ attribution.campus }}</td>
-                            <td>{{ attribution.bedroom.number }}</td>
-                            <td>{{ attribution.bedroom.category }}</td>
-                            <td>{{ attribution.location }}</td>
+                            <td>{{ attribution.chambre.numero }}</td>
+                            <td>{{ attribution.chambre.categorie }}</td>
+                            <td>{{ attribution.localisation }}</td>
                             <td>
                                 {% if attribution.status == 1 %} 
                                 <span class="badge bg-success">Approuvée</span>

@@ -14,27 +14,27 @@
       {% csrf_token %}
       <div class="row m-2">
         <div class="col-md-6">{{form.matricule|as_crispy_field }}</div>
-        <div class="col-md-6">{{form.student|as_crispy_field }}</div>
+        <div class="col-md-6">{{form.etudiant|as_crispy_field }}</div>
       </div>
       <div class="row m-2">
-        <div class="col-md-6">{{form.faculty|as_crispy_field }}</div>
+        <div class="col-md-6">{{form.faculte|as_crispy_field }}</div>
         <div class="col-md-6">{{form.departement|as_crispy_field }}</div>
       </div>
       <div class="row m-2">
-        <div class="col-md-4">{{form.accommodation|as_crispy_field }}</div>
+        <div class="col-md-4">{{form.logement|as_crispy_field }}</div>
         <div class="col-md-4">{{form.campus|as_crispy_field }}</div>
-        <div class="col-md-4">{{form.residence_card_number|as_crispy_field }}</div>
+        <div class="col-md-4">{{form.numero_carte_de_residence|as_crispy_field }}</div>
       </div>
 
       <div class="row m-2">
-        <div class="col-md-4">{{form.location|as_crispy_field }}</div>
-        <div class="col-md-4">{{form.bedroom|as_crispy_field }}</div>
-        <div class="col-md-4">{{form.entry_date|as_crispy_field }}</div>
+        <div class="col-md-4">{{form.localisation|as_crispy_field }}</div>
+        <div class="col-md-4">{{form.chambre|as_crispy_field }}</div>
+        <div class="col-md-4">{{form.date_entree|as_crispy_field }}</div>
       </div>
       <div class="row m-2">
         <div class="col-md-4">{{form.maquisard|as_crispy_field }}</div>
         <div class="col-md-4">{{form.matricule_maquisard|as_crispy_field }}</div>
-        <div class="col-md-4">{{form.residence_card_maquisard|as_crispy_field }}</div>
+        <div class="col-md-4">{{form.maquisard_carte_de_residence|as_crispy_field }}</div>
       </div>
 
       <div class="d-flex justify-content-center">
