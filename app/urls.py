@@ -12,6 +12,7 @@ urlpatterns = [
     path('student/delete/<int:id>', student.delete_student, name ='delete_student'),
 
     path('attribution', attribution.index, name ='view_attribution'),
+    path('application_rejected', attribution.index_rejected, name ='view_application_rejected'),
     path('attribution/add', attribution.add_attribution, name ='add_attribution'),
     path('attribution/store', attribution.store_attribution, name ='store_attribution'),
     path('attribution/edit/<int:id>', attribution.edit_attribution, name ='edit_attribution'),

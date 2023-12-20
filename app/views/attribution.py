@@ -23,6 +23,22 @@ def index(request):
         template_name=template,
         context=context  
     )
+@login_required(login_url ='login')
+@allowed_users(allowed_roles= ['admins'])
+def index_rejected(request):
+    page_title = 'Liste des demandes rejettées'
+    application_list = Application.objects.filter(status=2)
+    template = 'app/settings/attribution/index_rejected.html'
+    context = {
+        'page_title' : page_title,
+        'application_list' : application_list
+    }
+
+    return render(
+        request,
+        template_name=template,
+        context=context  
+    )
 
 @login_required(login_url ='login')
 @allowed_users(allowed_roles= ['admins'])
